@@ -592,20 +592,41 @@ footer{background:var(--steel);border-top:1px solid var(--border);padding:3rem 2
   <h2 class="section-title reveal">Projekt anfragen</h2>
   <div class="contact-grid reveal">
     <div>
-      <div class="form-field"><label class="form-label">Name</label><input type="text" class="form-input" placeholder="Dein Name"></div>
-      <div class="form-field"><label class="form-label">E-Mail</label><input type="email" class="form-input" placeholder="email@example.com"></div>
-      <div class="form-field">
-        <label class="form-label">Projekt-Interesse</label>
-        <select class="form-select form-input">
-          <option value="">— Projekt wählen —</option>
-          <option>① KI-CV-Optimizer (Low Budget · €299)</option>
-          <option>② Value Bet SaaS (Mid · €799)</option>
-          <option>③ IT Recruiting Platform (Enterprise · €2.499)</option>
-          <option>Eigenes Projekt / Anderes</option>
-        </select>
+      <!-- Formspree success message -->
+      <div data-fs-success style="display:none;background:#0e1a04;border:1px solid rgba(168,208,128,.4);padding:1.2rem 1.5rem;margin-bottom:1.2rem;font-size:.75rem;color:#a8d080;letter-spacing:.05em;">
+        ✓ Nachricht gesendet! Wir melden uns innerhalb von 24h.
       </div>
-      <div class="form-field"><label class="form-label">Nachricht</label><textarea class="form-textarea" placeholder="Kurz beschreiben was du brauchst..."></textarea></div>
-      <button class="form-submit">Anfrage senden →</button>
+      <!-- Formspree global error -->
+      <div data-fs-error style="display:none;background:#1e0900;border:1px solid rgba(201,79,42,.4);padding:1rem 1.5rem;margin-bottom:1rem;font-size:.72rem;color:#c94f2a;"></div>
+
+      <form id="contact-form">
+        <div class="form-field">
+          <label class="form-label" for="name">Name</label>
+          <input id="name" type="text" name="name" class="form-input" placeholder="Dein Name" required data-fs-field>
+          <span data-fs-error="name" style="font-size:.62rem;color:#c94f2a;margin-top:.2rem;display:block;"></span>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="email">E-Mail</label>
+          <input id="email" type="email" name="email" class="form-input" placeholder="email@example.com" required data-fs-field>
+          <span data-fs-error="email" style="font-size:.62rem;color:#c94f2a;margin-top:.2rem;display:block;"></span>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="projekt">Projekt-Interesse</label>
+          <select id="projekt" name="projekt" class="form-select form-input" data-fs-field>
+            <option value="">— Projekt wählen —</option>
+            <option>① KI-CV-Optimizer (Low Budget · €299)</option>
+            <option>② Value Bet SaaS (Mid · €799)</option>
+            <option>③ IT Recruiting Platform (Enterprise · €2.499)</option>
+            <option>Eigenes Projekt / Anderes</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="nachricht">Nachricht</label>
+          <textarea id="nachricht" name="nachricht" class="form-textarea" placeholder="Kurz beschreiben was du brauchst..." data-fs-field></textarea>
+          <span data-fs-error="nachricht" style="font-size:.62rem;color:#c94f2a;margin-top:.2rem;display:block;"></span>
+        </div>
+        <button type="submit" class="form-submit" data-fs-submit-btn>Anfrage senden →</button>
+      </form>
     </div>
     <div>
       <div class="qr-box">
@@ -684,6 +705,13 @@ footer{background:var(--steel);border-top:1px solid var(--border);padding:3rem 2
     </div>
   </div>
 </footer>
+
+<!-- Formspree Ajax -->
+<script>
+  window.formspree = window.formspree || function(){(formspree.q=formspree.q||[]).push(arguments);};
+  formspree('initForm',{formElement:'#contact-form',formId:'xpqnorbq'});
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
 <script>
 window.addEventListener('load',function(){
