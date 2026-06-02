@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Onboarding — Copy Code Agency</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111'/%3E%3Ctext x='3' y='23' font-family='monospace' font-weight='900' font-size='20' fill='%23a8d080'%3E%7B/%7D%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0e0e;
+  --surface: #161616;
+  --surface2: #1e1e1e;
+  --border: #262626;
+  --border2: #2e2e2e;
+  --text: #c8c4bc;
+  --text-dim: #6a6a6a;
+  --text-dimmer: #444;
+  --white: #ede9e3;
+  --sage: #a8d080;
+  --sage-dim: rgba(168,208,128,.15);
+  --sage-border: rgba(168,208,128,.3);
+  --ember: #c9502a;
+  --amber: #d4963a;
+  --blue: #6a9fd8;
+  --step-done: #4a8a5a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* GRAIN */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9000; opacity: .45;
+}
+
+/* ── LANG SWITCHER ── */
+.lang-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 800;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: .7rem 2rem;
+  background: rgba(14,14,14,.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.lang-logo {
+  display: flex; align-items: center; gap: .6rem;
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: .88rem; color: var(--white); text-decoration: none;
+}
+.lang-logo span { color: var(--sage); }
+.lang-logo svg { flex-shrink: 0; }
+.lang-btns { display: flex; gap: .3rem; }
+.lang-btn {
+  background: transparent;
+  border: 1px solid var(--border2);
+  color: var(--text-dim);
+  padding: .3rem .75rem;
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .2s;
+  border-radius: 2px;
+}
+.lang-btn:hover { border-color: var(--sage-border); color: var(--sage); }
+.lang-btn.active {
+  background: var(--sage-dim);
+  border-color: var(--sage-border);
+  color: var(--sage);
+}
+.lang-flag { margin-right: .3rem; }
+
+/* ── LAYOUT ── */
+.page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  padding-top: 48px;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 3rem 2rem;
+  position: sticky; top: 48px;
+  height: calc(100vh - 48px);
+  overflow-y: auto;
+  display: flex; flex-direction: column;
+}
+.sidebar-greeting {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.4;
+  margin-bottom: .5rem;
+}
+.sidebar-sub {
+  font-size: .68rem;
+  color: var(--text-dim);
+  line-height: 1.85;
+  margin-bottom: 2.5rem;
+}
+
+/* Progress steps */
+.steps { display: flex; flex-direction: column; gap: 0; margin-bottom: 3rem; }
+.step-item {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: .85rem 0;
+  border-bottom: 1px solid var(--border);
+  position: relative; cursor: pointer;
+  transition: all .2s;
+}
+.step-item:last-child { border: none; }
+.step-item:hover .step-label { color: var(--white); }
+.step-circle {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .6rem; font-weight: 700;
+  flex-shrink: 0;
+  color: var(--text-dimmer);
+  transition: all .3s;
+  margin-top: .05rem;
+}
+.step-item.active .step-circle {
+  border-color: var(--sage-border);
+  background: var(--sage-dim);
+  color: var(--sage);
+}
+.step-item.done .step-circle {
+  border-color: var(--step-done);
+  background: rgba(74,138,90,.15);
+  color: #4a8a5a;
+}
+.step-item.done .step-circle::before { content: '✓'; }
+.step-content {}
+.step-label {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600; font-size: .78rem;
+  color: var(--text-dim);
+  transition: color .2s;
+  display: block; margin-bottom: .15rem;
+}
+.step-item.active .step-label { color: var(--white); }
+.step-item.done .step-label { color: var(--text-dim); }
+.step-hint { font-size: .6rem; color: var(--text-dimmer); line-height: 1.6; }
+
+/* Progress bar */
+.progress-wrap { margin-top: auto; }
+.progress-label {
+  display: flex; justify-content: space-between;
+  font-size: .58rem; color: var(--text-dimmer);
+  letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: .5rem;
+}
+.progress-bar {
+  height: 3px; background: var(--border2); border-radius: 2px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: var(--sage);
+  border-radius: 2px;
+  transition: width .5s ease;
+  width: 0%;
+}
+
+/* ── MAIN ── */
+.main { padding: 3rem 3rem 5rem; }
+
+/* Step panels */
+.step-panel { display: none; animation: panelIn .4s ease both; }
+.step-panel.active { display: block; }
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.panel-tag {
+  font-size: .58rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--sage); margin-bottom: .6rem;
+  display: flex; align-items: center; gap: .7rem;
+}
+.panel-tag::before { content: ''; width: 1.4rem; height: 1px; background: var(--sage); }
+.panel-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: var(--white); line-height: 1.1;
+  letter-spacing: -.03em; margin-bottom: .6rem;
+}
+.panel-desc {
+  font-size: .72rem; color: var(--text-dim);
+  line-height: 1.9; margin-bottom: 2.5rem;
+  max-width: 520px;
+}
+
+/* Form fields */
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
+.field-grid.single { grid-template-columns: 1fr; }
+.field-grid.triple { grid-template-columns: 1fr 1fr 1fr; }
+
+.field { display: flex; flex-direction: column; gap: .35rem; }
+.field-label {
+  font-size: .58rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--text-dim);
+}
+.field-required { color: var(--ember); margin-left: .2rem; }
+.field-input, .field-select, .field-textarea {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--white);
+  padding: .75rem 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: .75rem;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  border-radius: 2px;
+  width: 100%;
+}
+.field-input:focus, .field-select:focus, .field-textarea:focus {
+  border-color: var(--sage-border);
+  box-shadow: 0 0 0 3px rgba(168,208,128,.06);
+}
+.field-input::placeholder, .field-textarea::placeholder { color: var(--text-dimmer); }
+.field-select { appearance: none; cursor: pointer; }
+.field-select option { background: #1a1a1a; }
+.field-textarea { min-height: 100px; resize: vertical; }
+
+/* Radio / Checkbox group */
+.radio-group, .check-group {
+  display: flex; flex-wrap: wrap; gap: .6rem;
+}
+.radio-item, .check-item {
+  display: flex; align-items: center; gap: .5rem;
+  border: 1px solid var(--border);
+  padding: .55rem .9rem;
+  cursor: pointer;
+  transition: all .2s;
+  border-radius: 2px;
+  font-size: .68rem; color: var(--text-dim);
+}
+.radio-item:hover, .check-item:hover {
+  border-color: var(--sage-border); color: var(--white);
+}
+.radio-item input, .check-item input { display: none; }
+.radio-item.selected, .check-item.selected {
+  background: var(--sage-dim);
+  border-color: var(--sage-border);
+  color: var(--sage);
+}
+.radio-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  border: 1px solid currentColor; flex-shrink: 0;
+  transition: background .2s;
+}
+.radio-item.selected .radio-dot { background: var(--sage); }
+.check-box {
+  width: 8px; height: 8px;
+  border: 1px solid currentColor; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .5rem;
+}
+.check-item.selected .check-box::after { content: '✓'; }
+
+/* Budget slider */
+.budget-display {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 2rem;
+  color: var(--sage); margin-bottom: .8rem;
+}
+.budget-display span { font-size: .7rem; color: var(--text-dim); font-weight: 400; }
+input[type=range] {
+  width: 100%; appearance: none;
+  height: 3px; background: var(--border2);
+  outline: none; border-radius: 2px;
+  margin-bottom: .5rem;
+}
+input[type=range]::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--sage);
+  cursor: pointer;
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--sage);
+}
+.budget-labels {
+  display: flex; justify-content: space-between;
+  font-size: .58rem; color: var(--text-dimmer);
+}
+
+/* Timeline picker */
+.timeline-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: .6rem;
+}
+.timeline-opt {
+  border: 1px solid var(--border);
+  padding: .8rem .6rem;
+  text-align: center; cursor: pointer;
+  transition: all .2s; border-radius: 2px;
+}
+.timeline-opt:hover { border-color: var(--sage-border); }
+.timeline-opt.selected {
+  background: var(--sage-dim); border-color: var(--sage-border);
+}
+.timeline-icon { font-size: 1.2rem; display: block; margin-bottom: .3rem; }
+.timeline-label { font-size: .6rem; color: var(--text-dim); display: block; }
+.timeline-opt.selected .timeline-label { color: var(--sage); }
+
+/* File upload */
+.upload-zone {
+  border: 1px dashed var(--border2);
+  padding: 2rem; text-align: center;
+  cursor: pointer; transition: all .2s;
+  border-radius: 2px; position: relative;
+}
+.upload-zone:hover { border-color: var(--sage-border); background: var(--sage-dim); }
+.upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
+.upload-icon { font-size: 1.8rem; display: block; margin-bottom: .5rem; }
+.upload-text { font-size: .68rem; color: var(--text-dim); }
+.upload-sub { font-size: .58rem; color: var(--text-dimmer); margin-top: .3rem; }
+.upload-files { margin-top: .8rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+.upload-file-tag {
+  background: var(--surface2); border: 1px solid var(--border);
+  padding: .25rem .6rem; font-size: .6rem; color: var(--text-dim);
+  border-radius: 2px;
+}
+
+/* Nav buttons */
+.nav-btns {
+  display: flex; gap: 1rem; margin-top: 2.5rem;
+  padding-top: 2rem; border-top: 1px solid var(--border);
+}
+.btn-next {
+  background: var(--sage); color: #0e0e0e;
+  border: none; padding: .85rem 2rem;
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: .75rem; letter-spacing: .08em;
+  text-transform: uppercase; cursor: pointer;
+  transition: all .2s; border-radius: 2px;
+}
+.btn-next:hover { background: #b8e090; transform: translateY(-1px); }
+.btn-back {
+  background: transparent; color: var(--text-dim);
+  border: 1px solid var(--border); padding: .85rem 1.5rem;
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: .75rem; letter-spacing: .08em;
+  text-transform: uppercase; cursor: pointer;
+  transition: all .2s; border-radius: 2px;
+}
+.btn-back:hover { border-color: var(--border2); color: var(--white); }
+
+/* SUCCESS SCREEN */
+.success-screen {
+  display: none; text-align: center;
+  padding: 4rem 2rem; animation: panelIn .5s ease both;
+}
+.success-screen.show { display: block; }
+.success-icon {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: rgba(74,138,90,.15);
+  border: 1px solid var(--step-done);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; margin: 0 auto 2rem;
+}
+.success-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem; font-weight: 800;
+  color: var(--white); margin-bottom: .8rem;
+}
+.success-sub { font-size: .75rem; color: var(--text-dim); line-height: 1.9; max-width: 400px; margin: 0 auto 2rem; }
+.success-next {
+  border: 1px solid var(--border);
+  padding: 1.5rem; margin-top: 2rem; text-align: left;
+}
+.success-next-title { font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: var(--text-dimmer); margin-bottom: 1rem; }
+.next-steps { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+.next-steps li { display: flex; gap: .8rem; font-size: .7rem; color: var(--text-dim); }
+.next-steps li::before { color: var(--sage); flex-shrink: 0; }
+
+/* Divider */
+.divider {
+  border: none; border-top: 1px solid var(--border);
+  margin: 1.8rem 0;
+}
+
+/* Info box */
+.info-box {
+  background: var(--surface2); border: 1px solid var(--border);
+  padding: 1rem 1.2rem; border-radius: 2px;
+  font-size: .68rem; color: var(--text-dim);
+  line-height: 1.8; margin-bottom: 1.2rem;
+  display: flex; gap: .8rem;
+}
+.info-box-icon { flex-shrink: 0; font-size: .9rem; }
+
+/* Formspree hidden fields style fix */
+.fs-error-msg {
+  font-size: .6rem; color: var(--ember); margin-top: .25rem; display: block;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .page { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; padding: 2rem 1.2rem; }
+  .main { padding: 2rem 1.2rem 4rem; }
+  .field-grid { grid-template-columns: 1fr; }
+  .field-grid.triple { grid-template-columns: 1fr 1fr; }
+  .timeline-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 480px) {
+  .lang-bar { padding: .6rem 1rem; }
+  .field-grid.triple { grid-template-columns: 1fr; }
+  .timeline-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <a href="index.html" class="lang-logo">
+    <svg width="26" height="26" viewBox="0 0 34 34" fill="none">
+      <rect width="34" height="34" rx="5" fill="#1a1a1a"/>
+      <text x="3" y="25" font-family="monospace" font-weight="900" font-size="19" fill="#a8d080">{</text>
+      <text x="12" y="25" font-family="monospace" font-weight="900" font-size="13" fill="#c94f2a">/</text>
+      <text x="19" y="25" font-family="monospace" font-weight="900" font-size="19" fill="#a8d080">}</text>
+    </svg>
+    copy<span>.</span>code<span>.</span>agency
+  </a>
+  <div class="lang-btns">
+    <button class="lang-btn active" onclick="setLang('de')"><span class="lang-flag">🇩🇪</span>DE</button>
+    <button class="lang-btn" onclick="setLang('en')"><span class="lang-flag">🇬🇧</span>EN</button>
+    <button class="lang-btn" onclick="setLang('pl')"><span class="lang-flag">🇵🇱</span>PL</button>
+  </div>
+</div>
+
+<!-- PAGE -->
+<div class="page">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-greeting" id="sb-greeting">Willkommen an Bord.</div>
+    <div class="sidebar-sub" id="sb-sub">Lass uns in 5 Schritten dein Projekt verstehen — damit wir direkt loslegen können.</div>
+
+    <div class="steps" id="steps-list">
+      <!-- Steps injected by JS -->
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span id="prog-label">Fortschritt</span>
+        <span id="prog-pct">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="prog-fill"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <form id="onboarding-form">
+
+      <!-- ── STEP 1: Kontakt ── -->
+      <div class="step-panel active" id="panel-1">
+        <div class="panel-tag" id="p1-tag">Schritt 1 von 5</div>
+        <h2 class="panel-title" id="p1-title">Wer bist du?</h2>
+        <p class="panel-desc" id="p1-desc">Grundlegende Kontaktdaten damit wir wissen mit wem wir sprechen.</p>
+
+        <div class="field-grid">
+          <div class="field">
+            <label class="field-label" id="l-fname">Vorname <span class="field-required">*</span></label>
+            <input type="text" name="vorname" class="field-input" id="i-fname" placeholder="Max" required>
+          </div>
+          <div class="field">
+            <label class="field-label" id="l-lname">Nachname <span class="field-required">*</span></label>
+            <input type="text" name="nachname" class="field-input" id="i-lname" placeholder="Mustermann" required>
+          </div>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label class="field-label" id="l-email">E-Mail <span class="field-required">*</span></label>
+            <input type="email" name="email" class="field-input" id="i-email" placeholder="max@firma.de" required>
+          </div>
+          <div class="field">
+            <label class="field-label" id="l-phone">Telefon / WhatsApp</label>
+            <input type="tel" name="telefon" class="field-input" id="i-phone" placeholder="+49 160 ...">
+          </div>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label class="field-label" id="l-company">Unternehmen / Marke</label>
+            <input type="text" name="unternehmen" class="field-input" id="i-company" placeholder="Meine GmbH">
+          </div>
+          <div class="field">
+            <label class="field-label" id="l-role">Deine Rolle</label>
+            <select name="rolle" class="field-select" id="i-role">
+              <option value="">—</option>
+              <option id="role-founder">Gründer / CEO</option>
+              <option id="role-pm">Produktmanager</option>
+              <option id="role-marketing">Marketing</option>
+              <option id="role-freelance">Freelancer</option>
+              <option id="role-other">Sonstiges</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-grid single">
+          <div class="field">
+            <label class="field-label" id="l-country">Land / Region</label>
+            <select name="land" class="field-select" id="i-country">
+              <option value="">—</option>
+              <option>🇩🇪 Deutschland</option>
+              <option>🇵🇱 Polen</option>
+              <option>🇦🇹 Österreich</option>
+              <option>🇨🇭 Schweiz</option>
+              <option>🇬🇧 Großbritannien / UK</option>
+              <option>🇺🇸 USA</option>
+              <option>🌍 Andere</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="nav-btns">
+          <button type="button" class="btn-next" onclick="goTo(2)" id="btn-next-1">Weiter →</button>
+        </div>
+      </div>
+
+      <!-- ── STEP 2: Projekt ── -->
+      <div class="step-panel" id="panel-2">
+        <div class="panel-tag" id="p2-tag">Schritt 2 von 5</div>
+        <h2 class="panel-title" id="p2-title">Dein Projekt</h2>
+        <p class="panel-desc" id="p2-desc">Welches unserer drei Angebote passt zu dir — oder hast du eine eigene Idee?</p>
+
+        <div class="field-grid single">
+          <div class="field">
+            <label class="field-label" id="l-proj-type">Projekttyp <span class="field-required">*</span></label>
+            <div class="radio-group" id="proj-radio">
+              <label class="radio-item" onclick="selectRadio(this,'proj-radio')">
+                <input type="radio" name="projekttyp" value="cv-optimizer">
+                <span class="radio-dot"></span>
+                <span>① KI-CV-Optimizer</span>
+              </label>
+              <label class="radio-item" onclick="selectRadio(this,'proj-radio')">
+                <input type="radio" name="projekttyp" value="value-bet">
+                <span class="radio-dot"></span>
+                <span>② Value Bet SaaS</span>
+              </label>
+              <label class="radio-item" onclick="selectRadio(this,'proj-radio')">
+                <input type="radio" name="projekttyp" value="recruiting">
+                <span class="radio-dot"></span>
+                <span>③ Recruiting Platform</span>
+              </label>
+              <label class="radio-item" onclick="selectRadio(this,'proj-radio')">
+                <input type="radio" name="projekttyp" value="custom">
+                <span class="radio-dot"></span>
+                <span id="r-custom">Eigenes Projekt</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="field-grid single">
+          <div class="field">
+            <label class="field-label" id="l-proj-name">Projektname / Arbeitstitel</label>
+            <input type="text" name="projektname" class="field-input" id="i-proj-name" placeholder="z.B. JobMatch Pro">
+          </div>
+        </div>
+        <div class="field-grid single">
+          <div class="field">
+            <label class="field-label" id="l-proj-desc">Projektbeschreibung <span class="field-required">*</span></label>
+            <textarea name="beschreibung" class="field-textarea" id="i-proj-desc" rows="4" placeholder="Was soll das Produkt tun? Wer ist die Zielgruppe? Was macht es besonders?" required></textarea>
+          </div>
+        </div>
+        <div class="field-grid single">
+          <div class="field">
+            <label class="field-label" id="l-goals">Hauptziele</label>
+            <div class="check-group" id="goals-check">
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="ziele" value="revenue"><span class="check-box"></span><span id="g-revenue">Umsatz generieren</span></label>
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="ziele" value="leads"><span class="check-box"></span><span id="g-leads">Leads sammeln</span></label>
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="ziele" value="brand"><span class="check-box"></span><span id="g-brand">Marke aufbauen</span></label>
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="ziele" value="automate"><span class="check-box"></span><span id="g-automate">Automatisieren</span></label>
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="ziele" value="scale"><span class="check-box"></span><span id="g-scale">Skalieren</span></label>
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="ziele" value="mvp"><span class="check-box"></span><span id="g-mvp">MVP testen</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-btns">
+          <button type="button" class="btn-back" onclick="goTo(1)" id="btn-back-2">← Zurück</button>
+          <button type="button" class="btn-next" onclick="goTo(3)" id="btn-next-2">Weiter →</button>
+        </div>
+      </div>
+
+      <!-- ── STEP 3: Budget & Timeline ── -->
+      <div class="step-panel" id="panel-3">
+        <div class="panel-tag" id="p3-tag">Schritt 3 von 5</div>
+        <h2 class="panel-title" id="p3-title">Budget & Timeline</h2>
+        <p class="panel-desc" id="p3-desc">Hilf uns dein Projekt realistisch einzuschätzen.</p>
+
+        <div class="field-grid single">
+          <div class="field">
+            <label class="field-label" id="l-budget">Budget <span class="field-required">*</span></label>
+            <div class="budget-display" id="budget-display">€ 500 <span id="budget-suffix">Entwicklungsbudget</span></div>
+            <input type="range" name="budget" id="budget-range" min="0" max="10" value="2" oninput="updateBudget(this.value)">
+            <input type="hidden" name="budget_value" id="budget-hidden" value="€ 299–€ 499">
+            <div class="budget-labels">
+              <span>€ 299</span><span>€ 1K</span><span>€ 5K</span><span>€ 10K+</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="field-grid single">
+          <div class="field">
+            <label class="field-label" id="l-timeline">Gewünschte Lieferzeit</label>
+            <div class="timeline-grid" id="timeline-opts">
+              <div class="timeline-opt" onclick="selectTimeline(this,'asap')" data-val="ASAP (1–2 Wochen)">
+                <span class="timeline-icon">⚡</span>
+                <span class="timeline-label" id="tl-asap">ASAP<br>1–2 Wo.</span>
+              </div>
+              <div class="timeline-opt selected" onclick="selectTimeline(this,'month')" data-val="1 Monat">
+                <span class="timeline-icon">📅</span>
+                <span class="timeline-label" id="tl-month">1 Monat</span>
+              </div>
+              <div class="timeline-opt" onclick="selectTimeline(this,'quarter')" data-val="2–3 Monate">
+                <span class="timeline-icon">🗓️</span>
+                <span class="timeline-label" id="tl-quarter">2–3 Mo.</span>
+              </div>
+              <div class="timeline-opt" onclick="selectTimeline(this,'flex')" data-val="Flexibel">
+                <span class="timeline-icon">🌿</span>
+                <span class="timeline-label" id="tl-flex">Flexibel</span>
+              </div>
+            </div>
+            <input type="hidden" name="timeline" id="timeline-hidden" value="1 Monat">
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="field-grid">
+          <div class="field">
+            <label class="field-label" id="l-start">Wunsch-Startdatum</label>
+            <input type="date" name="startdatum" class="field-input" id="i-start">
+          </div>
+          <div class="field">
+            <label class="field-label" id="l-meet">Erstgespräch bevorzugt</label>
+            <select name="erstgesprach" class="field-select" id="i-meet">
+              <option value="">—</option>
+              <option id="meet-video">Video-Call (Zoom/Meet)</option>
+              <option id="meet-phone">Telefon</option>
+              <option id="meet-wa">WhatsApp</option>
+              <option id="meet-email">Nur per E-Mail</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="nav-btns">
+          <button type="button" class="btn-back" onclick="goTo(2)" id="btn-back-3">← Zurück</button>
+          <button type="button" class="btn-next" onclick="goTo(4)" id="btn-next-3">Weiter →</button>
+        </div>
+      </div>
+
+      <!-- ── STEP 4: Technik & Anforderungen ── -->
+      <div class="step-panel" id="panel-4">
+        <div class="panel-tag" id="p4-tag">Schritt 4 von 5</div>
+        <h2 class="panel-title" id="p4-title">Technik & Details</h2>
+        <p class="panel-desc" id="p4-desc">Technische Anforderungen und vorhandene Ressourcen.</p>
+
+        <div class="field-grid single">
+          <div class="field">
+            <label class="field-label" id="l-tech-pref">Technologie-Präferenz</label>
+            <div class="check-group" id="tech-check">
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="tech" value="react"><span class="check-box"></span>React</label>
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="tech" value="angular"><span class="check-box"></span>Angular</label>
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="tech" value="dotnet"><span class="check-box"></span>.NET / C#</label>
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="tech" value="python"><span class="check-box"></span>Python</label>
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="tech" value="php"><span class="check-box"></span>PHP</label>
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="tech" value="mobile"><span class="check-box"></span>Mobile App</label>
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="tech" value="ai"><span class="check-box"></span>KI / Claude API</label>
+              <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" name="tech" value="egal"><span class="check-box"></span><span id="tc-egal">Egal / Offen</span></label>
+            </div>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="field-grid">
+          <div class="field">
+            <label class="field-label" id="l-domain">Domain vorhanden?</label>
+            <select name="domain" class="field-select" id="i-domain">
+              <option value="">—</option>
+              <option id="dom-yes">Ja</option>
+              <option id="dom-no">Nein, bitte empfehlen</option>
+              <option id="dom-new">Neu kaufen</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label" id="l-hosting">Hosting</label>
+            <select name="hosting" class="field-select" id="i-hosting">
+              <option value="">—</option>
+              <option>GitHub Pages</option>
+              <option>Netlify</option>
+              <option>Vercel</option>
+              <option>Eigener Server / VPS</option>
+              <option id="host-other">Sonstiges / Offen</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-grid single">
+          <div class="field">
+            <label class="field-label" id="l-monetize">Monetarisierungsmodell</label>
+            <div class="radio-group" id="mono-radio">
+              <label class="radio-item" onclick="selectRadio(this,'mono-radio')"><input type="radio" name="monetarisierung" value="einmalig"><span class="radio-dot"></span><span id="mn-once">Einmalig</span></label>
+              <label class="radio-item" onclick="selectRadio(this,'mono-radio')"><input type="radio" name="monetarisierung" value="abo"><span class="radio-dot"></span><span id="mn-sub">Abo / SaaS</span></label>
+              <label class="radio-item" onclick="selectRadio(this,'mono-radio')"><input type="radio" name="monetarisierung" value="freemium"><span class="radio-dot"></span>Freemium</label>
+              <label class="radio-item" onclick="selectRadio(this,'mono-radio')"><input type="radio" name="monetarisierung" value="b2b"><span class="radio-dot"></span>B2B Lizenz</label>
+              <label class="radio-item" onclick="selectRadio(this,'mono-radio')"><input type="radio" name="monetarisierung" value="open"><span class="radio-dot"></span><span id="mn-open">Noch offen</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-grid single">
+          <div class="field">
+            <label class="field-label" id="l-upload">Dokumente / Briefing (optional)</label>
+            <div class="upload-zone" id="upload-zone">
+              <input type="file" multiple accept=".pdf,.doc,.docx,.txt,.png,.jpg" onchange="handleFiles(this)">
+              <span class="upload-icon">📎</span>
+              <div class="upload-text" id="up-text">Dateien hier ablegen oder klicken</div>
+              <div class="upload-sub" id="up-sub">PDF, Word, Bilder — max. 10 MB</div>
+            </div>
+            <div class="upload-files" id="file-list"></div>
+          </div>
+        </div>
+
+        <div class="nav-btns">
+          <button type="button" class="btn-back" onclick="goTo(3)" id="btn-back-4">← Zurück</button>
+          <button type="button" class="btn-next" onclick="goTo(5)" id="btn-next-4">Weiter →</button>
+        </div>
+      </div>
+
+      <!-- ── STEP 5: Review & Absenden ── -->
+      <div class="step-panel" id="panel-5">
+        <div class="panel-tag" id="p5-tag">Schritt 5 von 5</div>
+        <h2 class="panel-title" id="p5-title">Überprüfen & Senden</h2>
+        <p class="panel-desc" id="p5-desc">Fast geschafft. Nochmal kurz drüber schauen — dann geht's los.</p>
+
+        <div class="info-box">
+          <span class="info-box-icon">🔒</span>
+          <span id="privacy-note">Deine Daten werden sicher über Formspree übertragen und nur für die Projektbearbeitung genutzt.</span>
+        </div>
+
+        <!-- Summary -->
+        <div id="review-summary" style="border:1px solid var(--border);padding:1.4rem;margin-bottom:1.5rem;border-radius:2px;">
+          <div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-dimmer);margin-bottom:1rem;" id="rev-title">Zusammenfassung</div>
+          <div id="summary-content" style="font-size:.7rem;color:var(--text-dim);line-height:2.2;"></div>
+        </div>
+
+        <div class="field-grid single">
+          <div class="field">
+            <label class="field-label" id="l-final-note">Abschließende Nachricht / Fragen</label>
+            <textarea name="abschlussnachricht" class="field-textarea" id="i-final" placeholder="Gibt es noch etwas was wir wissen sollten?"></textarea>
+          </div>
+        </div>
+
+        <div class="field-grid single">
+          <div class="field">
+            <label class="check-item" onclick="toggleCheck(this)" style="border:none;padding:0;gap:.7rem;">
+              <input type="checkbox" name="datenschutz" required>
+              <span class="check-box"></span>
+              <span id="l-privacy" style="font-size:.68rem;color:var(--text-dim);line-height:1.7;">Ich stimme der Verarbeitung meiner Daten für die Projektanfrage zu.</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Formspree success/error -->
+        <div data-fs-success style="display:none;background:#0e1a04;border:1px solid rgba(168,208,128,.4);padding:1.1rem 1.4rem;margin-top:1.2rem;font-size:.72rem;color:#a8d080;border-radius:2px;" id="fs-success-msg">
+          ✓ Erfolgreich gesendet! Wir melden uns innerhalb von 24h.
+        </div>
+        <div data-fs-error style="display:none;background:#1e0900;border:1px solid rgba(201,79,42,.4);padding:1rem 1.4rem;margin-top:.8rem;font-size:.7rem;color:#c94f2a;border-radius:2px;"></div>
+
+        <div class="nav-btns">
+          <button type="button" class="btn-back" onclick="goTo(4)" id="btn-back-5">← Zurück</button>
+          <button type="submit" class="btn-next" data-fs-submit-btn id="btn-submit">
+            <span id="btn-submit-label">Onboarding absenden ✓</span>
+          </button>
+        </div>
+      </div>
+
+    </form>
+
+    <!-- SUCCESS OVERLAY -->
+    <div class="success-screen" id="success-screen">
+      <div class="success-icon">✓</div>
+      <div class="success-title" id="suc-title">Perfekt!</div>
+      <p class="success-sub" id="suc-sub">Dein Onboarding ist bei uns angekommen. Wir melden uns innerhalb von 24 Stunden mit einem konkreten Angebot.</p>
+      <div class="success-next">
+        <div class="success-next-title" id="suc-next-title">Was als nächstes passiert</div>
+        <ul class="next-steps">
+          <li style="--c:var(--sage)"><span style="color:var(--sage)">1.</span><span id="suc-s1">Wir analysieren dein Briefing innerhalb von 24h</span></li>
+          <li><span style="color:var(--sage)">2.</span><span id="suc-s2">Du bekommst ein individuelles Angebot per E-Mail</span></li>
+          <li><span style="color:var(--sage)">3.</span><span id="suc-s3">Erstgespräch vereinbaren und Projekt starten</span></li>
+        </ul>
+      </div>
+      <a href="index.html" style="display:inline-block;margin-top:2rem;border:1px solid var(--border);padding:.7rem 1.5rem;font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;border-radius:2px;" id="suc-back">← Zurück zur Website</a>
+    </div>
+
+  </main>
+</div>
+
+<!-- Formspree -->
+<script>
+  window.formspree = window.formspree || function(){(formspree.q=formspree.q||[]).push(arguments);};
+  formspree('initForm',{formElement:'#onboarding-form',formId:'xpqnorbq'});
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+<script>
+// ── TRANSLATIONS ──
+const T = {
+  de: {
+    greeting: 'Willkommen an Bord.',
+    sub: 'Lass uns in 5 Schritten dein Projekt verstehen — damit wir direkt loslegen können.',
+    progress: 'Fortschritt',
+    steps: [
+      { label: 'Kontakt', hint: 'Name, E-Mail, Unternehmen' },
+      { label: 'Projekt', hint: 'Was willst du bauen?' },
+      { label: 'Budget & Zeit', hint: 'Rahmen & Deadline' },
+      { label: 'Technik', hint: 'Stack & Details' },
+      { label: 'Absenden', hint: 'Review & Fertig' },
+    ],
+    p1: { tag:'Schritt 1 von 5', title:'Wer bist du?', desc:'Grundlegende Kontaktdaten damit wir wissen mit wem wir sprechen.' },
+    p2: { tag:'Schritt 2 von 5', title:'Dein Projekt', desc:'Welches unserer drei Angebote passt zu dir — oder hast du eine eigene Idee?' },
+    p3: { tag:'Schritt 3 von 5', title:'Budget & Timeline', desc:'Hilf uns dein Projekt realistisch einzuschätzen.' },
+    p4: { tag:'Schritt 4 von 5', title:'Technik & Details', desc:'Technische Anforderungen und vorhandene Ressourcen.' },
+    p5: { tag:'Schritt 5 von 5', title:'Überprüfen & Senden', desc:'Fast geschafft. Nochmal kurz drüber schauen — dann geht\'s los.' },
+    lFname:'Vorname', lLname:'Nachname', lEmail:'E-Mail', lPhone:'Telefon / WhatsApp',
+    lCompany:'Unternehmen / Marke', lRole:'Deine Rolle',
+    roles:['—','Gründer / CEO','Produktmanager','Marketing','Freelancer','Sonstiges'],
+    lCountry:'Land / Region',
+    lProjType:'Projekttyp', rCustom:'Eigenes Projekt',
+    lProjName:'Projektname / Arbeitstitel', lProjDesc:'Projektbeschreibung',
+    lGoals:'Hauptziele',
+    goals:['Umsatz generieren','Leads sammeln','Marke aufbauen','Automatisieren','Skalieren','MVP testen'],
+    lBudget:'Budget', budgetSuffix:'Entwicklungsbudget',
+    lTimeline:'Gewünschte Lieferzeit',
+    tl:['ASAP\n1–2 Wo.','1 Monat','2–3 Mo.','Flexibel'],
+    lStart:'Wunsch-Startdatum', lMeet:'Erstgespräch bevorzugt',
+    meets:['—','Video-Call (Zoom/Meet)','Telefon','WhatsApp','Nur per E-Mail'],
+    lTechPref:'Technologie-Präferenz', tcEgal:'Egal / Offen',
+    lDomain:'Domain vorhanden?', domOpts:['—','Ja','Nein, bitte empfehlen','Neu kaufen'],
+    lHosting:'Hosting', hostOther:'Sonstiges / Offen',
+    lMonetize:'Monetarisierungsmodell',
+    mn:['Einmalig','Abo / SaaS','Freemium','B2B Lizenz','Noch offen'],
+    lUpload:'Dokumente / Briefing (optional)',
+    upText:'Dateien hier ablegen oder klicken', upSub:'PDF, Word, Bilder — max. 10 MB',
+    privacyNote:'Deine Daten werden sicher über Formspree übertragen und nur für die Projektbearbeitung genutzt.',
+    revTitle:'Zusammenfassung', lFinalNote:'Abschließende Nachricht / Fragen',
+    lPrivacy:'Ich stimme der Verarbeitung meiner Daten für die Projektanfrage zu.',
+    btnNext:'Weiter →', btnBack:'← Zurück', btnSubmit:'Onboarding absenden ✓',
+    sucTitle:'Perfekt!',
+    sucSub:'Dein Onboarding ist bei uns angekommen. Wir melden uns innerhalb von 24 Stunden mit einem konkreten Angebot.',
+    sucNextTitle:'Was als nächstes passiert',
+    sucSteps:['Wir analysieren dein Briefing innerhalb von 24h','Du bekommst ein individuelles Angebot per E-Mail','Erstgespräch vereinbaren und Projekt starten'],
+    sucBack:'← Zurück zur Website',
+  },
+  en: {
+    greeting: 'Welcome on board.',
+    sub: 'Let\'s understand your project in 5 steps — so we can get started right away.',
+    progress: 'Progress',
+    steps: [
+      { label: 'Contact', hint: 'Name, email, company' },
+      { label: 'Project', hint: 'What do you want to build?' },
+      { label: 'Budget & Time', hint: 'Scope & deadline' },
+      { label: 'Tech', hint: 'Stack & details' },
+      { label: 'Submit', hint: 'Review & done' },
+    ],
+    p1:{ tag:'Step 1 of 5', title:'Who are you?', desc:'Basic contact details so we know who we\'re talking to.' },
+    p2:{ tag:'Step 2 of 5', title:'Your Project', desc:'Which of our three offers fits you — or do you have your own idea?' },
+    p3:{ tag:'Step 3 of 5', title:'Budget & Timeline', desc:'Help us assess your project realistically.' },
+    p4:{ tag:'Step 4 of 5', title:'Tech & Details', desc:'Technical requirements and existing resources.' },
+    p5:{ tag:'Step 5 of 5', title:'Review & Submit', desc:'Almost done. Take a quick look — then let\'s go.' },
+    lFname:'First name', lLname:'Last name', lEmail:'E-mail', lPhone:'Phone / WhatsApp',
+    lCompany:'Company / Brand', lRole:'Your role',
+    roles:['—','Founder / CEO','Product Manager','Marketing','Freelancer','Other'],
+    lCountry:'Country / Region',
+    lProjType:'Project type', rCustom:'Custom project',
+    lProjName:'Project name / working title', lProjDesc:'Project description',
+    lGoals:'Main goals',
+    goals:['Generate revenue','Collect leads','Build brand','Automate','Scale','Test MVP'],
+    lBudget:'Budget', budgetSuffix:'development budget',
+    lTimeline:'Desired delivery time',
+    tl:['ASAP\n1–2 wks','1 month','2–3 mo.','Flexible'],
+    lStart:'Desired start date', lMeet:'Preferred first meeting',
+    meets:['—','Video call (Zoom/Meet)','Phone','WhatsApp','E-mail only'],
+    lTechPref:'Technology preference', tcEgal:'Open / flexible',
+    lDomain:'Domain available?', domOpts:['—','Yes','No, please advise','Buy new'],
+    lHosting:'Hosting', hostOther:'Other / Open',
+    lMonetize:'Monetisation model',
+    mn:['One-time','Subscription / SaaS','Freemium','B2B Licence','Still open'],
+    lUpload:'Documents / Briefing (optional)',
+    upText:'Drop files here or click', upSub:'PDF, Word, Images — max 10 MB',
+    privacyNote:'Your data is transmitted securely via Formspree and used only for project processing.',
+    revTitle:'Summary', lFinalNote:'Final message / questions',
+    lPrivacy:'I agree to the processing of my data for this project inquiry.',
+    btnNext:'Next →', btnBack:'← Back', btnSubmit:'Submit onboarding ✓',
+    sucTitle:'Perfect!',
+    sucSub:'Your onboarding has arrived. We\'ll get back to you within 24 hours with a concrete proposal.',
+    sucNextTitle:'What happens next',
+    sucSteps:['We analyse your briefing within 24h','You receive an individual proposal by e-mail','Schedule kick-off call and start the project'],
+    sucBack:'← Back to website',
+  },
+  pl: {
+    greeting: 'Witaj na pokładzie.',
+    sub: 'Poznajmy Twój projekt w 5 krokach — żebyśmy mogli zacząć od razu.',
+    progress: 'Postęp',
+    steps: [
+      { label: 'Kontakt', hint: 'Imię, e-mail, firma' },
+      { label: 'Projekt', hint: 'Co chcesz zbudować?' },
+      { label: 'Budżet i czas', hint: 'Zakres i termin' },
+      { label: 'Technikalia', hint: 'Stack i szczegóły' },
+      { label: 'Wyślij', hint: 'Przegląd i gotowe' },
+    ],
+    p1:{ tag:'Krok 1 z 5', title:'Kim jesteś?', desc:'Podstawowe dane kontaktowe, abyśmy wiedzieli, z kim rozmawiamy.' },
+    p2:{ tag:'Krok 2 z 5', title:'Twój projekt', desc:'Które z naszych trzech ofert pasuje do Ciebie — lub masz własny pomysł?' },
+    p3:{ tag:'Krok 3 z 5', title:'Budżet i harmonogram', desc:'Pomóż nam realistycznie ocenić Twój projekt.' },
+    p4:{ tag:'Krok 4 z 5', title:'Technikalia i szczegóły', desc:'Wymagania techniczne i posiadane zasoby.' },
+    p5:{ tag:'Krok 5 z 5', title:'Przejrzyj i wyślij', desc:'Prawie gotowe. Jeszcze raz sprawdź — i ruszamy.' },
+    lFname:'Imię', lLname:'Nazwisko', lEmail:'E-mail', lPhone:'Telefon / WhatsApp',
+    lCompany:'Firma / Marka', lRole:'Twoja rola',
+    roles:['—','Założyciel / CEO','Product Manager','Marketing','Freelancer','Inne'],
+    lCountry:'Kraj / Region',
+    lProjType:'Typ projektu', rCustom:'Własny projekt',
+    lProjName:'Nazwa projektu / roboczy tytuł', lProjDesc:'Opis projektu',
+    lGoals:'Główne cele',
+    goals:['Generować przychody','Zbierać leady','Budować markę','Automatyzować','Skalować','Testować MVP'],
+    lBudget:'Budżet', budgetSuffix:'budżet deweloperski',
+    lTimeline:'Oczekiwany czas realizacji',
+    tl:['ASAP\n1–2 tyg.','1 miesiąc','2–3 mies.','Elastycznie'],
+    lStart:'Preferowana data startu', lMeet:'Preferowana forma pierwszego kontaktu',
+    meets:['—','Wideorozmowa (Zoom/Meet)','Telefon','WhatsApp','Tylko e-mail'],
+    lTechPref:'Preferencje technologiczne', tcEgal:'Otwarte / bez preferencji',
+    lDomain:'Posiadasz domenę?', domOpts:['—','Tak','Nie, proszę doradzić','Kupić nową'],
+    lHosting:'Hosting', hostOther:'Inne / otwarte',
+    lMonetize:'Model monetyzacji',
+    mn:['Jednorazowy','Subskrypcja / SaaS','Freemium','Licencja B2B','Jeszcze otwarte'],
+    lUpload:'Dokumenty / Brief (opcjonalnie)',
+    upText:'Upuść pliki tutaj lub kliknij', upSub:'PDF, Word, Obrazy — maks. 10 MB',
+    privacyNote:'Twoje dane są bezpiecznie przesyłane przez Formspree i wykorzystywane wyłącznie do obsługi projektu.',
+    revTitle:'Podsumowanie', lFinalNote:'Wiadomość końcowa / pytania',
+    lPrivacy:'Wyrażam zgodę na przetwarzanie moich danych w celu realizacji zapytania projektowego.',
+    btnNext:'Dalej →', btnBack:'← Wstecz', btnSubmit:'Wyślij onboarding ✓',
+    sucTitle:'Doskonale!',
+    sucSub:'Twój onboarding dotarł do nas. Skontaktujemy się w ciągu 24 godzin z konkretną ofertą.',
+    sucNextTitle:'Co się wydarzy dalej',
+    sucSteps:['Analizujemy Twój brief w ciągu 24h','Otrzymasz indywidualną ofertę e-mailem','Umówimy rozmowę inauguracyjną i zaczniemy projekt'],
+    sucBack:'← Powrót do strony',
+  }
+};
+
+let lang = 'de';
+let currentStep = 1;
+const TOTAL = 5;
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
+  applyTranslations();
+}
+
+function applyTranslations() {
+  const t = T[lang];
+  // Sidebar
+  document.getElementById('sb-greeting').textContent = t.greeting;
+  document.getElementById('sb-sub').textContent = t.sub;
+  document.getElementById('prog-label').textContent = t.progress;
+  // Steps sidebar
+  renderSteps();
+  // Panel tags/titles/descs
+  for (let i=1;i<=5;i++) {
+    const p = t[`p${i}`];
+    document.getElementById(`p${i}-tag`).textContent = p.tag;
+    document.getElementById(`p${i}-title`).textContent = p.title;
+    document.getElementById(`p${i}-desc`).textContent = p.desc;
+  }
+  // Step 1 fields
+  setText('l-fname', t.lFname); setText('l-lname', t.lLname);
+  setText('l-email', t.lEmail); setText('l-phone', t.lPhone);
+  setText('l-company', t.lCompany); setText('l-role', t.lRole);
+  setPlaceholder('i-fname', lang==='de'?'Max':lang==='en'?'John':'Jan');
+  setPlaceholder('i-lname', lang==='de'?'Mustermann':lang==='en'?'Smith':'Kowalski');
+  setPlaceholder('i-email', lang==='de'?'max@firma.de':lang==='en'?'john@company.com':'jan@firma.pl');
+  // Roles
+  const roleEl = document.getElementById('i-role');
+  t.roles.forEach((r,i) => { if(roleEl.options[i]) roleEl.options[i].text = r; });
+  setText('l-country', t.lCountry);
+  // Step 2
+  setText('l-proj-type', t.lProjType);
+  setText('r-custom', t.rCustom);
+  setText('l-proj-name', t.lProjName);
+  setPlaceholder('i-proj-name', lang==='de'?'z.B. JobMatch Pro':lang==='en'?'e.g. JobMatch Pro':'np. JobMatch Pro');
+  setText('l-proj-desc', t.lProjDesc);
+  setPlaceholder('i-proj-desc', lang==='de'?'Was soll das Produkt tun?':lang==='en'?'What should the product do?':'Co ma robić produkt?');
+  setText('l-goals', t.lGoals);
+  const gIds=['g-revenue','g-leads','g-brand','g-automate','g-scale','g-mvp'];
+  gIds.forEach((id,i) => setText(id, t.goals[i]));
+  // Step 3
+  setText('l-budget', t.lBudget);
+  setText('budget-suffix', t.budgetSuffix);
+  setText('l-timeline', t.lTimeline);
+  const tlIds=['tl-asap','tl-month','tl-quarter','tl-flex'];
+  tlIds.forEach((id,i)=>setText(id, t.tl[i]));
+  setText('l-start', t.lStart);
+  setText('l-meet', t.lMeet);
+  const meetEl = document.getElementById('i-meet');
+  t.meets.forEach((m,i)=>{ if(meetEl.options[i]) meetEl.options[i].text = m; });
+  // Step 4
+  setText('l-tech-pref', t.lTechPref);
+  setText('tc-egal', t.tcEgal);
+  setText('l-domain', t.lDomain);
+  const domEl = document.getElementById('i-domain');
+  t.domOpts.forEach((d,i)=>{ if(domEl.options[i]) domEl.options[i].text = d; });
+  setText('l-hosting', t.lHosting);
+  setText('l-monetize', t.lMonetize);
+  const mnIds=['mn-once','mn-sub',null,null,'mn-open'];
+  mnIds.forEach((id,i)=>{ if(id) setText(id, t.mn[i]); });
+  setText('l-upload', t.lUpload);
+  setText('up-text', t.upText); setText('up-sub', t.upSub);
+  // Step 5
+  setText('privacy-note', t.privacyNote);
+  setText('rev-title', t.revTitle);
+  setText('l-final-note', t.lFinalNote);
+  setPlaceholder('i-final', lang==='de'?'Gibt es noch etwas was wir wissen sollten?':lang==='en'?'Is there anything else we should know?':'Czy jest coś jeszcze, co powinniśmy wiedzieć?');
+  setText('l-privacy', t.lPrivacy);
+  // Buttons
+  document.querySelectorAll('[id^="btn-next-"]').forEach(b=>{ if(!b.dataset.submit) b.textContent=t.btnNext; });
+  document.querySelectorAll('[id^="btn-back-"]').forEach(b=>b.textContent=t.btnBack);
+  setText('btn-submit-label', t.btnSubmit);
+  // Success
+  setText('suc-title', t.sucTitle);
+  setText('suc-sub', t.sucSub);
+  setText('suc-next-title', t.sucNextTitle);
+  setText('suc-s1', t.sucSteps[0]);
+  setText('suc-s2', t.sucSteps[1]);
+  setText('suc-s3', t.sucSteps[2]);
+  setText('suc-back', t.sucBack);
+  // Formspree success
+  const fsMsg = document.getElementById('fs-success-msg');
+  if(fsMsg) fsMsg.textContent = (lang==='de'?'✓ Erfolgreich gesendet! Wir melden uns innerhalb von 24h.':lang==='en'?'✓ Successfully sent! We\'ll be in touch within 24h.':'✓ Wysłano! Skontaktujemy się w ciągu 24h.');
+}
+
+function setText(id, val) {
+  const el = document.getElementById(id);
+  if(el) el.textContent = val;
+}
+function setPlaceholder(id, val) {
+  const el = document.getElementById(id);
+  if(el) el.placeholder = val;
+}
+
+// ── STEPS SIDEBAR ──
+function renderSteps() {
+  const list = document.getElementById('steps-list');
+  list.innerHTML = '';
+  T[lang].steps.forEach((s,i)=>{
+    const n = i+1;
+    const div = document.createElement('div');
+    div.className = 'step-item' + (n===currentStep?' active':n<currentStep?' done':'');
+    div.onclick = ()=>{ if(n<=currentStep||n===currentStep+1) goTo(n); };
+    div.innerHTML = `
+      <div class="step-circle">${n<currentStep?'':n}</div>
+      <div class="step-content">
+        <span class="step-label">${s.label}</span>
+        <span class="step-hint">${s.hint}</span>
+      </div>`;
+    list.appendChild(div);
+  });
+}
+
+// ── NAVIGATION ──
+function goTo(n) {
+  document.getElementById(`panel-${currentStep}`).classList.remove('active');
+  currentStep = n;
+  document.getElementById(`panel-${currentStep}`).classList.add('active');
+  updateProgress();
+  renderSteps();
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(n===5) buildSummary();
+}
+
+function updateProgress() {
+  const pct = Math.round(((currentStep-1)/TOTAL)*100);
+  document.getElementById('prog-fill').style.width = pct+'%';
+  document.getElementById('prog-pct').textContent = pct+'%';
+}
+
+// ── RADIO / CHECKBOX ──
+function selectRadio(el, groupId) {
+  document.querySelectorAll(`#${groupId} .radio-item`).forEach(r=>r.classList.remove('selected'));
+  el.classList.add('selected');
+  el.querySelector('input').checked = true;
+}
+function toggleCheck(el) {
+  el.classList.toggle('selected');
+  el.querySelector('input').checked = el.classList.contains('selected');
+}
+
+// ── BUDGET SLIDER ──
+const budgetMap = [
+  '€ 299','€ 499','€ 799','€ 1.000','€ 1.500','€ 2.499',
+  '€ 3.000','€ 5.000','€ 7.500','€ 10.000','€ 10.000+'
+];
+function updateBudget(v) {
+  const val = budgetMap[parseInt(v)];
+  document.getElementById('budget-display').innerHTML = val+' <span id="budget-suffix">'+T[lang].budgetSuffix+'</span>';
+  document.getElementById('budget-hidden').value = val;
+}
+
+// ── TIMELINE ──
+function selectTimeline(el, val) {
+  document.querySelectorAll('#timeline-opts .timeline-opt').forEach(t=>t.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('timeline-hidden').value = el.dataset.val;
+}
+
+// ── FILE UPLOAD ──
+function handleFiles(input) {
+  const list = document.getElementById('file-list');
+  list.innerHTML = '';
+  Array.from(input.files).forEach(f=>{
+    const tag = document.createElement('div');
+    tag.className = 'upload-file-tag';
+    tag.textContent = f.name;
+    list.appendChild(tag);
+  });
+}
+
+// ── REVIEW SUMMARY ──
+function buildSummary() {
+  const fields = [
+    ['i-fname','i-lname'],
+    'i-email','i-phone','i-company',
+    'i-proj-name','i-proj-desc',
+    'budget-hidden','timeline-hidden',
+  ];
+  let html = '';
+  const add = (label, val) => {
+    if(val&&val.trim()) html += `<div><span style="color:var(--text-dimmer);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;">${label}:</span> ${val}</div>`;
+  };
+  const v = id => { const el=document.getElementById(id); return el?el.value:''; };
+  add('Name', [v('i-fname'),v('i-lname')].filter(Boolean).join(' '));
+  add('E-Mail', v('i-email'));
+  add('Telefon', v('i-phone'));
+  add('Firma', v('i-company'));
+  const proj = document.querySelector('#proj-radio .selected span:last-child');
+  add('Projekt', proj?proj.textContent:'');
+  add('Projektname', v('i-proj-name'));
+  add('Budget', v('budget-hidden'));
+  add('Timeline', v('timeline-hidden'));
+  const checks = [...document.querySelectorAll('#goals-check .selected span:last-child')].map(s=>s.textContent).join(', ');
+  add('Ziele / Goals', checks);
+  const techs = [...document.querySelectorAll('#tech-check .selected input')].map(i=>i.value).join(', ');
+  add('Tech', techs);
+  document.getElementById('summary-content').innerHTML = html || '<span style="color:var(--text-dimmer)">—</span>';
+}
+
+// ── FORMSPREE SUCCESS HOOK ──
+// Watch for success message appearing and show our custom success screen
+const fsObserver = new MutationObserver(() => {
+  const fsSuccess = document.querySelector('[data-fs-success]');
+  if(fsSuccess && fsSuccess.style.display !== 'none') {
+    document.getElementById('onboarding-form').style.display = 'none';
+    document.getElementById('success-screen').classList.add('show');
+  }
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const fsEl = document.querySelector('[data-fs-success]');
+  if(fsEl) fsObserver.observe(fsEl, {attributes:true, attributeFilter:['style']});
+});
+
+// Init
+renderSteps();
+updateProgress();
+applyTranslations();
+</script>
+</body>
+</html>
