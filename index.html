@@ -3,60 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Copy Code Agency — AI · Web · SaaS aus Frankfurt</title>
-
-<!-- FAVICON inline SVG as data URI -->
+<title>Copy Code Agency — KI · Web · SaaS aus Frankfurt</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111'/%3E%3Ctext x='4' y='23' font-family='monospace' font-weight='900' font-size='20' fill='%23a8d080'%3E%7B/%7D%3C/text%3E%3C/svg%3E">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@300;400;700&family=Fraunces:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@300;400;700&family=Fraunces:ital,wght@1,300;1,700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --black: #0c0c0c;
-  --white: #e8e4de;
-  --sage: #a8d080;       /* softer than acid green */
-  --ember: #c94f2a;      /* deeper rust */
-  --steel: #181818;
-  --mid: #252525;
-  --muted: #7a7a7a;
-  --muted2: #555;
-  --border: #222;
-  --amber: #d4963a;      /* warmer gold */
-  --text: #ccc8c0;       /* body text — softer than white */
-}
+:root{--black:#0c0c0c;--white:#e8e4de;--sage:#a8d080;--ember:#c94f2a;--steel:#181818;--mid:#252525;--muted:#7a7a7a;--border:#222;--amber:#d4963a;--text:#ccc8c0;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--black);color:var(--text);font-family:'JetBrains Mono',monospace;overflow-x:hidden;}
-
-/* NOISE */
+body{background:var(--black);color:var(--text);font-family:'JetBrains Mono',monospace;overflow-x:hidden;line-height:1.6;}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.4;}
 
-/* ── LOGO SVG ── */
-.logo-svg { display:flex; align-items:center; gap:.7rem; text-decoration:none; }
-.logo-mark {
-  width:34px; height:34px; flex-shrink:0;
-}
-.logo-wordmark {
-  font-family:'Syne',sans-serif;
-  font-weight:800;
-  font-size:.95rem;
-  letter-spacing:-.02em;
-  color:var(--white);
-  line-height:1;
-}
-.logo-wordmark span { color:var(--sage); }
-.logo-sub {
-  font-family:'JetBrains Mono',monospace;
-  font-size:.5rem;
-  color:var(--muted);
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  margin-top:.15rem;
-}
-
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;justify-content:space-between;align-items:center;padding:.9rem 2rem;background:rgba(12,12,12,0.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
+nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;justify-content:space-between;align-items:center;padding:.9rem 2rem;background:rgba(12,12,12,0.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
+.logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
+.logo-mark{width:34px;height:34px;}
+.logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:-.02em;color:var(--white);line-height:1;}
+.logo-text span{color:var(--sage);}
+.logo-sub{font-size:.5rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:.15rem;}
 .nav-links{display:flex;gap:2rem;list-style:none;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;}
 .nav-links a{color:var(--muted);text-decoration:none;transition:color .2s;}
 .nav-links a:hover{color:var(--sage);}
@@ -64,16 +28,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;justify-content
 .nav-cta:hover{background:var(--ember);color:var(--white);}
 
 /* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 2rem 4rem;position:relative;overflow:hidden;}
-.hero-glow{position:absolute;top:-20%;right:-15%;width:70vw;height:70vw;background:radial-gradient(circle,rgba(168,208,128,0.03) 0%,transparent 65%);pointer-events:none;}
-.hero-tag{display:inline-block;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);border:1px solid rgba(168,208,128,.25);padding:.3rem .8rem;margin-bottom:2rem;animation:fadeUp .8s ease both;}
-.hero-title{font-family:'Syne',sans-serif;font-size:clamp(3.2rem,7.5vw,6.5rem);font-weight:800;line-height:.93;letter-spacing:-.04em;margin-bottom:2rem;animation:fadeUp .8s .1s ease both;color:var(--white);}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 2rem 5rem;position:relative;max-width:1100px;margin:0 auto;}
+.hero-glow{position:absolute;top:-20%;right:-15%;width:70vw;height:70vw;background:radial-gradient(circle,rgba(168,208,128,0.04) 0%,transparent 65%);pointer-events:none;}
+.hero-tag{display:inline-block;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);border:1px solid rgba(168,208,128,.25);padding:.3rem .8rem;margin-bottom:2rem;}
+.hero-title{font-family:'Syne',sans-serif;font-size:clamp(3rem,7vw,6rem);font-weight:800;line-height:.95;letter-spacing:-.04em;margin-bottom:2rem;color:var(--white);}
 .hero-title .a{color:var(--sage);}
 .hero-title .r{color:var(--ember);}
-.hero-sub{font-size:.8rem;color:var(--muted);line-height:1.95;max-width:540px;margin-bottom:1rem;animation:fadeUp .8s .2s ease both;}
-.team-chips{display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:3rem;animation:fadeUp .8s .3s ease both;}
-.chip{border:1px solid var(--border);padding:.35rem .85rem;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);}
+.hero-sub{font-size:.82rem;color:var(--muted);line-height:1.95;max-width:520px;margin-bottom:2.5rem;}
+.hero-chips{display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:3rem;}
+.chip{border:1px solid var(--border);padding:.35rem .85rem;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
 .chip.active{border-color:rgba(168,208,128,.4);color:var(--sage);}
+.hero-cta-row{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-primary{background:var(--sage);color:#0c0c0c;padding:.85rem 1.8rem;font-family:'Syne',sans-serif;font-weight:700;font-size:.75rem;text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:all .2s;display:inline-block;}
+.btn-primary:hover{background:var(--ember);color:var(--white);}
+.btn-ghost{border:1px solid var(--border);color:var(--muted);padding:.85rem 1.8rem;font-family:'Syne',sans-serif;font-weight:700;font-size:.75rem;text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:all .2s;display:inline-block;}
+.btn-ghost:hover{border-color:var(--sage);color:var(--sage);}
 
 /* TICKER */
 .ticker-wrap{overflow:hidden;background:var(--sage);padding:.5rem 0;white-space:nowrap;}
@@ -82,619 +51,410 @@ nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;justify-content
 .ticker-dot{color:var(--ember);}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* PROJECTS */
-.projects{padding:6rem 2rem;}
+/* SECTION */
+.section{padding:6rem 2rem;max-width:1100px;margin:0 auto;}
 .section-tag{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;}
 .section-tag::before{content:'';width:1.8rem;height:1px;background:var(--sage);}
-.section-title{font-family:'Syne',sans-serif;font-size:clamp(1.9rem,3.8vw,3rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:.8rem;color:var(--white);}
-.section-sub{font-size:.73rem;color:var(--muted);line-height:1.85;margin-bottom:4rem;max-width:480px;}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:.8rem;color:var(--white);}
+.section-sub{font-size:.73rem;color:var(--muted);line-height:1.85;margin-bottom:3.5rem;max-width:500px;}
 
-.project-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
-.pcard{background:var(--black);display:flex;flex-direction:column;position:relative;overflow:hidden;transition:background .3s;}
-.pcard:hover{background:var(--steel);}
-.pcard-tier{padding:.38rem 1rem;font-size:.53rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700;}
-.tier-low{background:#111a08;color:#9abe6a;}
-.tier-mid{background:#1e1400;color:#c4883a;}
-.tier-high{background:#1e0900;color:#b84830;}
-.pcard-img{height:170px;background-size:cover;background-position:center;position:relative;}
-.pcard-img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 35%,rgba(12,12,12,.97));}
-.pcard-price{position:absolute;bottom:.9rem;right:1rem;font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;}
-.price-low{color:#9abe6a;}
-.price-mid{color:#c4883a;}
-.price-high{color:#b84830;}
-.pcard-body{padding:1.6rem;flex:1;display:flex;flex-direction:column;}
-.pcard-num{font-size:.52rem;color:var(--muted2);letter-spacing:.15em;margin-bottom:.45rem;}
-.pcard-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;line-height:1.2;margin-bottom:.7rem;color:var(--white);}
-.pcard-desc{font-size:.68rem;color:var(--muted);line-height:1.85;margin-bottom:1.4rem;flex:1;}
-.pcard-stack{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.4rem;}
-.stack-tag{background:var(--mid);font-size:.52rem;padding:.18rem .55rem;letter-spacing:.06em;color:var(--muted2);}
-.pcard-meta{border-top:1px solid var(--border);padding-top:1.1rem;display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:1.4rem;}
-.meta-item{font-size:.6rem;}
-.meta-label{color:var(--muted2);display:block;margin-bottom:.15rem;letter-spacing:.08em;text-transform:uppercase;font-size:.52rem;}
-.meta-val{color:var(--white);font-family:'Syne',sans-serif;font-weight:700;}
-.pcard-cta{display:block;text-align:center;padding:.85rem;font-family:'Syne',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:all .25s;}
-.cta-low{background:transparent;border:1px solid rgba(154,190,106,.5);color:#9abe6a;}
-.cta-low:hover{background:#9abe6a;color:#0c0c0c;}
-.cta-mid{background:transparent;border:1px solid rgba(196,136,58,.5);color:#c4883a;}
-.cta-mid:hover{background:#c4883a;color:#0c0c0c;}
-.cta-high{background:#b84830;border:1px solid #b84830;color:var(--white);}
-.cta-high:hover{background:#d05535;transform:translateY(-2px);}
+/* PRODUKTE */
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--border);}
+.product{background:var(--black);padding:2.2rem;display:flex;flex-direction:column;transition:background .25s;position:relative;overflow:hidden;}
+.product:hover{background:var(--steel);}
+.product::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--sage);transform:scaleX(0);transform-origin:left;transition:.3s;}
+.product:hover::before{transform:scaleX(1);}
+.product-num{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;}
+.product-icon{font-size:1.6rem;margin-bottom:1rem;}
+.product-title{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;color:var(--white);margin-bottom:.8rem;line-height:1.2;}
+.product-desc{font-size:.72rem;color:var(--muted);line-height:1.9;margin-bottom:1.4rem;flex:1;}
+.product-stack{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.4rem;}
+.stack-tag{background:var(--mid);font-size:.54rem;padding:.2rem .55rem;letter-spacing:.06em;color:var(--muted);}
+.product-status{display:inline-flex;align-items:center;gap:.4rem;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;}
+.status-live{color:#4aaa5a;}
+.status-live::before{content:'';width:5px;height:5px;border-radius:50%;background:#4aaa5a;display:inline-block;animation:pulse 1.5s infinite;}
+.status-dev{color:var(--amber);}
+.status-dev::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--amber);display:inline-block;}
 
-/* FUNNEL */
-.funnel{padding:6rem 2rem;border-top:1px solid var(--border);}
-.funnel-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
-.funnel-steps{margin-top:2rem;}
-.step{display:flex;gap:1.4rem;margin-bottom:2rem;position:relative;}
-.step::before{content:'';position:absolute;left:18px;top:38px;width:1px;height:calc(100% + .5rem);background:var(--border);}
-.step:last-child::before{display:none;}
-.step-num{width:38px;height:38px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:.75rem;flex-shrink:0;}
-.step-num.sage{border-color:rgba(168,208,128,.4);color:var(--sage);}
-.step-num.amber{border-color:rgba(212,150,58,.4);color:var(--amber);}
-.step-num.ember{border-color:rgba(201,79,42,.4);color:var(--ember);}
-.step-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;margin-bottom:.3rem;color:var(--white);}
+/* WIE WIR ARBEITEN */
+.process{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px;background:var(--border);margin-top:3rem;}
+.process-step{background:var(--black);padding:2rem;transition:background .2s;}
+.process-step:hover{background:var(--steel);}
+.step-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--sage);opacity:.3;margin-bottom:.8rem;}
+.step-title{font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700;color:var(--white);margin-bottom:.5rem;}
 .step-desc{font-size:.68rem;color:var(--muted);line-height:1.85;}
-.funnel-mockup{background:var(--steel);border:1px solid var(--border);padding:1.4rem;margin-bottom:1.4rem;}
-.mockup-bar{background:var(--mid);padding:.55rem 1rem;display:flex;align-items:center;gap:.4rem;margin-bottom:1rem;}
-.mdot{width:8px;height:8px;border-radius:50%;}
-.mockup-content{font-size:.67rem;color:var(--muted);line-height:2.1;}
-.mockup-highlight{color:var(--white);}
-.revenue-box{border:1px solid var(--border);padding:1.4rem;}
-.rev-title{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted2);margin-bottom:1rem;}
-.rev-row{display:flex;justify-content:space-between;align-items:center;padding:.55rem 0;border-bottom:1px solid var(--border);font-size:.7rem;}
-.rev-row:last-child{border:none;}
-.rev-label{color:var(--muted);}
-.rev-val{font-family:'Syne',sans-serif;font-weight:700;}
-.rev-sage{color:#9abe6a;}
-.rev-amber{color:#c4883a;}
-.rev-ember{color:#b84830;}
 
 /* TEAM */
-.team-section{padding:6rem 2rem;background:var(--steel);}
+.team-wrap{background:var(--steel);padding:6rem 0;border-top:1px solid var(--border);}
+.team-inner{max-width:1100px;margin:0 auto;padding:0 2rem;}
 .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem;}
 .team-card{border:1px solid var(--border);padding:2rem;background:var(--black);}
 .team-role{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);margin-bottom:.7rem;}
-.team-name{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;margin-bottom:.4rem;color:var(--white);}
-.team-title{font-size:.7rem;color:var(--muted);margin-bottom:1.4rem;}
-.team-skills{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.4rem;}
-.skill-tag{background:var(--mid);font-size:.56rem;padding:.22rem .55rem;letter-spacing:.06em;color:var(--muted2);}
+.team-name{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;color:var(--white);margin-bottom:.3rem;}
+.team-title{font-size:.7rem;color:var(--muted);margin-bottom:1.2rem;}
+.team-skills{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1rem;}
+.skill-tag{background:var(--mid);font-size:.56rem;padding:.22rem .55rem;letter-spacing:.06em;color:var(--muted);}
 .skill-tag.hot{background:#0e1a04;color:#8ab060;border:1px solid rgba(138,176,96,.2);}
-.team-stat-row{display:flex;gap:1.5rem;}
-.ts-num{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;color:var(--sage);}
-.ts-label{font-size:.56rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+.team-bio{font-size:.68rem;color:var(--muted);line-height:1.85;}
 
-/* TIMELINE */
-.timeline-section{padding:6rem 2rem;}
-.timeline{margin-top:3rem;position:relative;}
-.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border);}
-.tl-item{padding-left:2rem;margin-bottom:2.4rem;position:relative;}
-.tl-dot{position:absolute;left:-4px;top:5px;width:9px;height:9px;border-radius:50%;border:2px solid var(--border);background:var(--black);}
-.tl-dot.sage{border-color:#9abe6a;background:#9abe6a;}
-.tl-dot.amber{border-color:#c4883a;background:#c4883a;}
-.tl-dot.ember{border-color:#b84830;background:#b84830;}
-.tl-week{font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted2);margin-bottom:.28rem;}
-.tl-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;margin-bottom:.28rem;color:var(--white);}
-.tl-desc{font-size:.67rem;color:var(--muted);line-height:1.85;}
-.tl-who{display:inline-block;margin-top:.35rem;font-size:.56rem;padding:.12rem .48rem;border-radius:2px;}
-.who-t{background:#0a1300;color:#7aaa50;}
-.who-a{background:#180900;color:#a04828;}
-.who-b{background:#151515;color:var(--muted2);border:1px solid var(--border);}
-
-/* PRICING */
-.pricing-section{padding:6rem 2rem;background:var(--steel);}
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:3rem;}
-.price-card{background:var(--black);padding:2rem;}
-.price-card.feat{background:#0f0f0f;}
-.plan-label{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.9rem;}
-.pl-low{color:#9abe6a;}
-.pl-mid{color:#c4883a;}
-.pl-high{color:#b84830;}
-.plan-amount{font-family:'Syne',sans-serif;font-size:2.6rem;font-weight:800;line-height:1;margin-bottom:.28rem;color:var(--white);}
-.plan-period{font-size:.6rem;color:var(--muted);margin-bottom:1.4rem;}
-.plan-list{list-style:none;margin-bottom:1.8rem;}
-.plan-list li{font-size:.68rem;color:var(--muted);padding:.38rem 0;border-bottom:1px solid var(--border);display:flex;gap:.55rem;align-items:flex-start;}
-.plan-list li::before{content:'→';flex-shrink:0;}
-.li-low::before{color:#9abe6a;}
-.li-mid::before{color:#c4883a;}
-.li-high::before{color:#b84830;}
-.plan-cta{display:block;text-align:center;padding:.82rem;font-family:'Syne',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:all .2s;}
-
-/* CONTACT */
-.contact-section{padding:6rem 2rem;border-top:1px solid var(--border);}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:3rem;}
+/* KONTAKT */
+.contact-wrap{padding:6rem 0;border-top:1px solid var(--border);}
+.contact-inner{max-width:1100px;margin:0 auto;padding:0 2rem;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:3rem;}
+.contact-form{}
 .form-field{margin-bottom:.9rem;}
-.form-label{display:block;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2);margin-bottom:.38rem;}
+.form-label{display:block;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.38rem;}
 .form-input,.form-select,.form-textarea{width:100%;background:var(--steel);border:1px solid var(--border);color:var(--white);padding:.75rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.73rem;outline:none;transition:border-color .2s;}
 .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:rgba(168,208,128,.5);}
 .form-select{appearance:none;cursor:pointer;}
-.form-textarea{min-height:105px;resize:vertical;}
+.form-textarea{min-height:110px;resize:vertical;}
 .form-submit{width:100%;background:var(--sage);color:#0c0c0c;border:none;padding:.95rem;font-family:'Syne',sans-serif;font-weight:800;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-top:.4rem;}
 .form-submit:hover{background:var(--ember);color:var(--white);}
-.qr-box{border:1px solid var(--border);padding:1.4rem;text-align:center;margin-bottom:1.4rem;}
-.qr-label{font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted2);margin-bottom:.9rem;}
-#qr-contact{display:flex;justify-content:center;}
-#qr-contact canvas,#qr-contact img{border:3px solid var(--sage);}
-.qr-url{margin-top:.7rem;font-size:.58rem;color:var(--sage);}
-.contact-info{list-style:none;}
-.contact-info li{display:flex;align-items:center;gap:1rem;padding:.65rem 0;border-bottom:1px solid var(--border);font-size:.7rem;color:var(--muted);}
-.contact-info li:last-child{border:none;}
+.contact-info-block{}
+.contact-info-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:1rem;}
+.contact-info-sub{font-size:.72rem;color:var(--muted);line-height:1.85;margin-bottom:2rem;}
+.contact-list{list-style:none;}
+.contact-list li{display:flex;align-items:center;gap:1rem;padding:.65rem 0;border-bottom:1px solid var(--border);font-size:.7rem;color:var(--muted);}
+.contact-list li:last-child{border:none;}
 .ci-icon{font-size:.95rem;width:1.4rem;text-align:center;}
+.contact-list a{color:var(--sage);text-decoration:none;}
 
 /* FOOTER */
-footer{background:var(--steel);border-top:1px solid var(--border);padding:3rem 2rem 1.5rem;}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
-.footer-brand-row{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem;}
-.footer-desc{font-size:.68rem;color:var(--muted);line-height:1.85;margin-bottom:1.4rem;}
-.footer-qr-label{font-size:.53rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);margin-bottom:.45rem;}
-#qr-footer canvas,#qr-footer img{border:2px solid var(--sage);display:block;}
-.footer-qr-sub{font-size:.56rem;color:var(--muted2);margin-top:.45rem;line-height:1.6;}
-.footer-col-title{font-family:'Syne',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.9rem;color:var(--white);}
-.footer-links{list-style:none;display:flex;flex-direction:column;gap:.48rem;}
-.footer-links a{font-size:.68rem;color:var(--muted);text-decoration:none;transition:color .2s;}
+footer{background:var(--steel);border-top:1px solid var(--border);padding:2.5rem 2rem;}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-copy{font-size:.6rem;color:var(--muted);}
+.footer-links{display:flex;gap:1.5rem;list-style:none;}
+.footer-links a{font-size:.62rem;color:var(--muted);text-decoration:none;transition:color .2s;}
 .footer-links a:hover{color:var(--sage);}
-.footer-bottom{border-top:1px solid var(--border);padding-top:1.4rem;display:flex;justify-content:space-between;align-items:center;}
-.footer-copy{font-size:.6rem;color:var(--muted2);}
-.footer-badges{display:flex;gap:.45rem;}
-.badge{border:1px solid var(--border);padding:.18rem .55rem;font-size:.53rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);}
-.badge.live{border-color:#3a8a4a;color:#4aaa5a;display:flex;align-items:center;gap:.3rem;}
-.badge.live::before{content:'';width:5px;height:5px;border-radius:50%;background:#4aaa5a;animation:pulse 1.5s infinite;}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.35)}}
-.reveal{opacity:0;transform:translateY(24px);transition:all .7s ease;}
-.reveal.visible{opacity:1;transform:translateY(0);}
-
-@media(max-width:768px){
-  .project-cards,.funnel-grid,.team-grid,.pricing-grid,.contact-grid,.footer-grid{grid-template-columns:1fr;}
-  .hero{padding:6rem 1.2rem 3rem;}
-  .nav-links{display:none;}
-  .projects,.funnel,.team-section,.timeline-section,.pricing-section,.contact-section{padding:4rem 1.2rem;}
-}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@media(max-width:768px){.nav-links{display:none;}.contact-grid,.team-grid{grid-template-columns:1fr;}.hero{padding:6rem 1.2rem 3rem;}.section{padding:4rem 1.2rem;}}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <a href="#" class="logo-svg">
-    <!-- LOGO MARK: stylized {/} bracket code symbol -->
-    <svg class="logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <a href="#" class="logo">
+    <svg class="logo-mark" viewBox="0 0 34 34" fill="none">
       <rect width="34" height="34" rx="5" fill="#141414"/>
-      <text x="3" y="25" font-family="'JetBrains Mono', monospace" font-weight="900" font-size="19" fill="#a8d080">{</text>
-      <text x="12" y="25" font-family="'JetBrains Mono', monospace" font-weight="900" font-size="13" fill="#c94f2a">/</text>
-      <text x="19" y="25" font-family="'JetBrains Mono', monospace" font-weight="900" font-size="19" fill="#a8d080">}</text>
+      <text x="3" y="25" font-family="monospace" font-weight="900" font-size="19" fill="#a8d080">{</text>
+      <text x="12" y="25" font-family="monospace" font-weight="900" font-size="13" fill="#c94f2a">/</text>
+      <text x="19" y="25" font-family="monospace" font-weight="900" font-size="19" fill="#a8d080">}</text>
     </svg>
     <div>
-      <div class="logo-wordmark">copy<span>.</span>code<span>.</span>agency</div>
+      <div class="logo-text">copy<span>.</span>code<span>.</span>agency</div>
       <div class="logo-sub">Frankfurt · ASGlobal · 2025</div>
     </div>
   </a>
   <ul class="nav-links">
-    <li><a href="#projekte">Projekte</a></li>
+    <li><a href="#produkte">Produkte</a></li>
+    <li><a href="#prozess">Prozess</a></li>
     <li><a href="#team">Team</a></li>
-    <li><a href="#timeline">Timeline</a></li>
-    <li><a href="#preise">Preise</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
   <a href="#kontakt" class="nav-cta">Projekt anfragen →</a>
 </nav>
 
 <!-- HERO -->
+<div style="max-width:1100px;margin:0 auto;">
 <section class="hero">
   <div class="hero-glow"></div>
-  <div class="hero-tag">✦ Frankfurt · Tomasz + André · ASGlobal 2025</div>
+  <div class="hero-tag">✦ Frankfurt · Fullstack Dev + Conversion Copy · 2025</div>
   <h1 class="hero-title">
     Code.<br>
     <span class="a">Copy.</span><br>
-    <span class="r">Cash.</span>
+    <span class="r">Conversion.</span>
   </h1>
-  <p class="hero-sub">Fullstack-Entwicklung trifft Conversion-Copywriting. Wir bauen digitale Produkte die wirklich verkaufen — vom MVP bis zur Enterprise-Plattform.</p>
-  <div class="team-chips">
+  <p class="hero-sub">Fullstack-Entwicklung trifft Conversion-Copywriting. Wir bauen digitale Produkte, die wirklich verkaufen — vom ersten Konzept bis zur fertigen Plattform.</p>
+  <div class="hero-chips">
     <span class="chip active">⚡ Tomasz — Fullstack Dev</span>
     <span class="chip active">✍️ André — Copy & KI</span>
     <span class="chip">🇩🇪 Frankfurt → Remote</span>
     <span class="chip">React · .NET · Python · Claude AI</span>
   </div>
+  <div class="hero-cta-row">
+    <a href="#kontakt" class="btn-primary">Projekt anfragen →</a>
+    <a href="#produkte" class="btn-ghost">Produkte ansehen</a>
+  </div>
 </section>
+</div>
 
 <!-- TICKER -->
 <div class="ticker-wrap">
   <div class="ticker">
-    <span class="ticker-item">React <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Angular <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">.NET / C# <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Claude AI <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">PostgreSQL <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Python <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Telegram Bots <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Gumroad · Stripe <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">KI-Produkte <span class="ticker-dot">✦</span></span>
     <span class="ticker-item">Conversion Copy <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">React Native <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">React <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Angular <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">.NET / C# <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Claude AI <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">PostgreSQL <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Python <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Telegram Bots <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Gumroad · Stripe <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Fullstack Dev <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">SaaS aus Frankfurt <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">React · .NET · Claude AI <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Texte die verkaufen <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">KI-Produkte <span class="ticker-dot">✦</span></span>
     <span class="ticker-item">Conversion Copy <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">React Native <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Fullstack Dev <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">SaaS aus Frankfurt <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">React · .NET · Claude AI <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Texte die verkaufen <span class="ticker-dot">✦</span></span>
   </div>
 </div>
 
-<!-- 3 PROJECT CARDS -->
-<section id="projekte" class="projects">
-  <div class="section-tag">3 Produkte · 3 Märkte</div>
-  <h2 class="section-title reveal">Unsere Projekte</h2>
-  <p class="section-sub reveal">Drei Szenarien — von schnell & profitabel bis zur skalierbaren Plattform. Jedes mit eigenem Verkaufsfunnel.</p>
+<!-- PRODUKTE -->
+<div id="produkte" style="border-top:1px solid var(--border)">
+<div class="section">
+  <div class="section-tag">Was wir bauen</div>
+  <div class="section-title">Digitale Produkte.<br>Fertig zum Einsatz.</div>
+  <div class="section-sub">Drei Kernprodukte — entwickelt, getextet und live. Jedes mit klarem Nutzen, klarer Zielgruppe, klarem Ergebnis.</div>
 
-  <div class="project-cards reveal">
-    <!-- P1 -->
-    <div class="pcard">
-      <div class="pcard-tier tier-low">① Low Budget · Quick Win</div>
-      <div class="pcard-img" style="background-image:url('https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&q=80')">
-        <div class="pcard-img-overlay"></div>
-        <div class="pcard-price price-low">€9,99<span style="font-size:.55rem;font-weight:400">/CV</span></div>
+  <div class="products">
+
+    <div class="product">
+      <div class="product-num">01 / Produkt</div>
+      <div class="product-icon">🤖</div>
+      <div class="product-title">KI-Lebenslauf Optimizer</div>
+      <div class="product-desc">CV hochladen → Claude AI optimiert ihn vollautomatisch für ATS-Systeme und Recruiting-Algorithmen → perfekt formatiertes PDF zum Download. Kein Abo, keine Anmeldung — sofortiger Mehrwert für Jobsuchende.</div>
+      <div class="product-stack">
+        <span class="stack-tag">Claude AI</span>
+        <span class="stack-tag">React</span>
+        <span class="stack-tag">PDF-Export</span>
+        <span class="stack-tag">ATS-Optimierung</span>
       </div>
-      <div class="pcard-body">
-        <div class="pcard-num">Projekt 01 · 2 Wochen · ab sofort</div>
-        <div class="pcard-title">KI-Lebenslauf<br>Optimizer</div>
-        <div class="pcard-desc">User lädt CV hoch → Claude AI optimiert es für ATS-Systeme → perfektes PDF zum Download. Kein Abo nötig, sofortiger Mehrwert.</div>
-        <div class="pcard-stack">
-          <span class="stack-tag">React</span><span class="stack-tag">PHP</span><span class="stack-tag">Claude API</span><span class="stack-tag">Gumroad</span><span class="stack-tag">PDF</span>
-        </div>
-        <div class="pcard-meta">
-          <div class="meta-item"><span class="meta-label">Deadline</span><span class="meta-val">2 Wochen</span></div>
-          <div class="meta-item"><span class="meta-label">Potenzial</span><span class="meta-val">€4K/Mo</span></div>
-          <div class="meta-item"><span class="meta-label">Tomasz</span><span class="meta-val">React + PHP</span></div>
-          <div class="meta-item"><span class="meta-label">André</span><span class="meta-val">Copy + KI</span></div>
-        </div>
-        <a href="#funnel1" class="pcard-cta cta-low">Funnel ansehen →</a>
-      </div>
+      <div class="product-status status-dev">In Entwicklung</div>
     </div>
-    <!-- P2 -->
-    <div class="pcard">
-      <div class="pcard-tier tier-mid">② Mid Range · SaaS</div>
-      <div class="pcard-img" style="background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80')">
-        <div class="pcard-img-overlay"></div>
-        <div class="pcard-price price-mid">€49<span style="font-size:.55rem;font-weight:400">/Monat</span></div>
+
+    <div class="product">
+      <div class="product-num">02 / Produkt</div>
+      <div class="product-icon">📊</div>
+      <div class="product-title">Value Bet Dashboard</div>
+      <div class="product-desc">Datengetriebenes Analyse-Dashboard für Sports Analytics: Live-Quoten, Kelly-Calculator, xG-Monitor, Telegram-Alerts in Echtzeit. Basiert auf dem bewährten CROWN v10 System — jetzt als SaaS-Plattform mit Abo-Modell für ernsthafte Analysten.</div>
+      <div class="product-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">SQLite</span>
+        <span class="stack-tag">Telegram API</span>
+        <span class="stack-tag">Claude Vision</span>
+        <span class="stack-tag">Kelly Criterion</span>
       </div>
-      <div class="pcard-body">
-        <div class="pcard-num">Projekt 02 · 4 Wochen · CROWN v10</div>
-        <div class="pcard-title">Value Bet<br>Dashboard SaaS</div>
-        <div class="pcard-desc">Live Odds, Kelly Calculator, xG Monitor, Telegram Alerts — basierend auf CROWN v10. Analytics-Dashboard mit Abo-Modell.</div>
-        <div class="pcard-stack">
-          <span class="stack-tag">React</span><span class="stack-tag">.NET API</span><span class="stack-tag">PostgreSQL</span><span class="stack-tag">Python</span><span class="stack-tag">Stripe</span>
-        </div>
-        <div class="pcard-meta">
-          <div class="meta-item"><span class="meta-label">Deadline</span><span class="meta-val">4 Wochen</span></div>
-          <div class="meta-item"><span class="meta-label">Potenzial</span><span class="meta-val">€8K/Mo</span></div>
-          <div class="meta-item"><span class="meta-label">Tomasz</span><span class="meta-val">React + .NET</span></div>
-          <div class="meta-item"><span class="meta-label">André</span><span class="meta-val">CROWN Logik</span></div>
-        </div>
-        <a href="#funnel2" class="pcard-cta cta-mid">Funnel ansehen →</a>
-      </div>
+      <div class="product-status status-live">Live · Beta</div>
     </div>
-    <!-- P3 -->
-    <div class="pcard">
-      <div class="pcard-tier tier-high">③ High Class · Enterprise</div>
-      <div class="pcard-img" style="background-image:url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80')">
-        <div class="pcard-img-overlay"></div>
-        <div class="pcard-price price-high">€199<span style="font-size:.55rem;font-weight:400">/Monat</span></div>
+
+    <div class="product">
+      <div class="product-num">03 / Produkt</div>
+      <div class="product-icon">🌍</div>
+      <div class="product-title">IT Recruiting Platform DE/PL</div>
+      <div class="product-desc">Jobportal mit KI-gestütztem Matching für IT-Fachkräfte auf dem Weg von Polen nach Deutschland. Angular-Frontend, React Native App, KI-Profilabgleich. B2B-Modell für Firmen, B2C für Kandidaten — bilingual DE/PL.</div>
+      <div class="product-stack">
+        <span class="stack-tag">Angular</span>
+        <span class="stack-tag">React Native</span>
+        <span class="stack-tag">.NET Backend</span>
+        <span class="stack-tag">KI-Matching</span>
+        <span class="stack-tag">DE / PL</span>
       </div>
-      <div class="pcard-body">
-        <div class="pcard-num">Projekt 03 · 8 Wochen · B2B</div>
-        <div class="pcard-title">IT Recruiting<br>Platform DE/PL</div>
-        <div class="pcard-desc">Jobportal mit KI-Matching für IT-Fachkräfte Polen→Deutschland. Angular + React Native App. B2B Firmen-Abos + B2C Kandidaten.</div>
-        <div class="pcard-stack">
-          <span class="stack-tag">Angular</span><span class="stack-tag">React Native</span><span class="stack-tag">.NET MVC</span><span class="stack-tag">SQL Server</span><span class="stack-tag">Claude AI</span>
-        </div>
-        <div class="pcard-meta">
-          <div class="meta-item"><span class="meta-label">Deadline</span><span class="meta-val">8 Wochen</span></div>
-          <div class="meta-item"><span class="meta-label">Potenzial</span><span class="meta-val">€16K/Mo</span></div>
-          <div class="meta-item"><span class="meta-label">Tomasz</span><span class="meta-val">Fullstack</span></div>
-          <div class="meta-item"><span class="meta-label">André</span><span class="meta-val">Brand + SEO</span></div>
-        </div>
-        <a href="#funnel3" class="pcard-cta cta-high">Funnel ansehen →</a>
+      <div class="product-status status-dev">In Entwicklung</div>
+    </div>
+
+    <div class="product">
+      <div class="product-num">04 / Service</div>
+      <div class="product-icon">✍️</div>
+      <div class="product-title">Conversion Copy & Brand</div>
+      <div class="product-desc">Landingpages, Produkttexte, E-Mail-Strecken — geschrieben von einem Texter mit Direktvertriebshintergrund. Kein akademisches Schreiben: Texte die verkaufen, weil ich selbst jahrelang verkauft habe.</div>
+      <div class="product-stack">
+        <span class="stack-tag">Landingpages</span>
+        <span class="stack-tag">SEO-Copy</span>
+        <span class="stack-tag">E-Mail-Sequenzen</span>
+        <span class="stack-tag">DE / EN</span>
       </div>
+      <div class="product-status status-live">Verfügbar</div>
+    </div>
+
+    <div class="product">
+      <div class="product-num">05 / Service</div>
+      <div class="product-icon">🏨</div>
+      <div class="product-title">Digitalisierung Hospitality</div>
+      <div class="product-desc">Vom Willkommensbuch in 30 Sprachen bis zur Housekeeping-Management-App mit Echtzeit-Zimmerstatus, Facility-Ticket-System und Gästelisten-Import via Foto + KI. Wir bauen das digitale Rückgrat für Ihr Hotel.</div>
+      <div class="product-stack">
+        <span class="stack-tag">Browser-App</span>
+        <span class="stack-tag">Mehrsprachig</span>
+        <span class="stack-tag">Claude Vision</span>
+        <span class="stack-tag">localStorage</span>
+      </div>
+      <div class="product-status status-live">Live · Turmhotel FFM</div>
+    </div>
+
+    <div class="product">
+      <div class="product-num">06 / Service</div>
+      <div class="product-icon">⚡</div>
+      <div class="product-title">MVP in 4 Wochen</div>
+      <div class="product-desc">Idee → funktionsfähiges Produkt in vier Wochen. Kein Overhead, keine langen Planungsphasen. Wir entwickeln und texten parallel — so geht's schneller als mit getrennten Teams. Für Startups und Einzelunternehmer.</div>
+      <div class="product-stack">
+        <span class="stack-tag">Rapid Prototyping</span>
+        <span class="stack-tag">GitHub Pages</span>
+        <span class="stack-tag">React / HTML</span>
+        <span class="stack-tag">Copy-First</span>
+      </div>
+      <div class="product-status status-live">Verfügbar</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- PROZESS -->
+<div id="prozess" style="border-top:1px solid var(--border)">
+<div class="section">
+  <div class="section-tag">Wie wir arbeiten</div>
+  <div class="section-title">Kein Overhead.<br>Direkt zum Ergebnis.</div>
+  <div class="section-sub">Zwei Spezialisten, ein Prozess. Entwicklung und Copy laufen parallel — das spart Zeit und produziert bessere Ergebnisse.</div>
+
+  <div class="process">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-title">Briefing</div>
+      <div class="step-desc">30-Minuten-Call. Wir hören zu, stellen die richtigen Fragen und schätzen ehrlich ein, was machbar ist — und was nicht.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-title">Konzept</div>
+      <div class="step-desc">Klare Architektur: Was wird gebaut, wer liest/nutzt es, was soll es auslösen. Copy und Tech denken hier zusammen.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-title">Produktion</div>
+      <div class="step-desc">André schreibt, Tomasz baut — parallel. Kein Warten aufeinander. Wöchentliche Updates, keine Überraschungen.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <div class="step-title">Launch</div>
+      <div class="step-desc">Live schalten, testen, iterieren. Wir bleiben dabei bis es wirklich funktioniert — nicht nur technisch, sondern auch im Markt.</div>
     </div>
   </div>
-</section>
-
-<!-- FUNNEL 1 -->
-<section id="funnel1" class="funnel">
-  <div class="section-tag" style="color:#9abe6a">Projekt 01 · KI-CV-Optimizer</div>
-  <h2 class="section-title reveal">Verkaufsfunnel:<br>CV Optimizer</h2>
-  <div class="funnel-grid reveal">
-    <div>
-      <div class="funnel-steps">
-        <div class="step"><div class="step-num sage">1</div><div><div class="step-title">Traffic → Landing Page</div><div class="step-desc">LinkedIn-Posts, TikTok-Shorts, Google Ads auf „Lebenslauf optimieren". André schreibt Headlines die klicken.</div></div></div>
-        <div class="step"><div class="step-num sage">2</div><div><div class="step-title">CV Upload → KI-Analyse</div><div class="step-desc">Tomasz baut Upload-Tool. Claude analysiert CV, gibt kostenlose Vorschau (3 Verbesserungen sichtbar).</div></div></div>
-        <div class="step"><div class="step-num sage">3</div><div><div class="step-title">Gumroad Checkout → €9,99</div><div class="step-desc">Vollständiges optimiertes PDF + ATS-Score. Upsell: €29 LinkedIn-Profil-Optimierung.</div></div></div>
-        <div class="step"><div class="step-num sage">4</div><div><div class="step-title">Email Follow-up → Abo €19/Mo</div><div class="step-desc">Automatische Email-Sequenz. Monatliches Update des CVs für aktive Jobsucher.</div></div></div>
-      </div>
-    </div>
-    <div>
-      <div class="funnel-mockup">
-        <div class="mockup-bar"><div class="mdot" style="background:#c0504a"></div><div class="mdot" style="background:#c09030"></div><div class="mdot" style="background:#40904a"></div><span style="font-size:.58rem;color:var(--muted);margin-left:.5rem">cv-optimizer.app</span></div>
-        <div class="mockup-content"><span class="mockup-highlight">🎯 Dein CV — optimiert von KI</span><br>Upload → Analyse → Download in 60 Sek.<br><br><span style="color:#9abe6a">✓ ATS-optimiert · ✓ Keyword-stark</span><br><span style="color:#9abe6a">✓ Sofort-Download als PDF</span><br><br><span class="mockup-highlight">Nur €9,99 · 2.847 CVs optimiert</span></div>
-      </div>
-      <div class="revenue-box">
-        <div class="rev-title">Revenue-Projektion · Monat 3</div>
-        <div class="rev-row"><span class="rev-label">CV-Verkäufe (300/Mo × €9,99)</span><span class="rev-val rev-sage">€2.997</span></div>
-        <div class="rev-row"><span class="rev-label">Abos (50 × €19)</span><span class="rev-val rev-sage">€950</span></div>
-        <div class="rev-row"><span class="rev-label">Upsells LinkedIn</span><span class="rev-val rev-sage">€580</span></div>
-        <div class="rev-row" style="border-top:1px solid #9abe6a;padding-top:.7rem"><span class="rev-label" style="color:var(--white)">Gesamt</span><span class="rev-val rev-sage" style="font-size:1.05rem">€4.527/Mo</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FUNNEL 2 -->
-<section id="funnel2" class="funnel" style="background:var(--steel)">
-  <div class="section-tag" style="color:#c4883a">Projekt 02 · Value Bet SaaS</div>
-  <h2 class="section-title reveal">Verkaufsfunnel:<br>Dashboard SaaS</h2>
-  <div class="funnel-grid reveal">
-    <div>
-      <div class="funnel-steps">
-        <div class="step"><div class="step-num amber">1</div><div><div class="step-title">Community → Telegram Kanal</div><div class="step-desc">André baut Telegram-Kanal mit täglichen Free-Tips aus CROWN v10. 1000+ Follower in 4 Wochen.</div></div></div>
-        <div class="step"><div class="step-num amber">2</div><div><div class="step-title">Free Trial → 7 Tage Dashboard</div><div class="step-desc">Tomasz baut React-Dashboard. User sieht Live-Odds, Kelly-Rechner, Stats — 7 Tage kostenlos.</div></div></div>
-        <div class="step"><div class="step-num amber">3</div><div><div class="step-title">Stripe Abo → €49/Monat</div><div class="step-desc">Vollzugang: xG Monitor, Telegram Alerts, API-Zugang. Jahres-Abo €399 (32% Rabatt).</div></div></div>
-        <div class="step"><div class="step-num amber">4</div><div><div class="step-title">White-Label → B2B €299/Mo</div><div class="step-desc">Tipster-Communities kaufen White-Label-Version. Custom-Branding-Option.</div></div></div>
-      </div>
-    </div>
-    <div>
-      <div class="funnel-mockup">
-        <div class="mockup-bar"><div class="mdot" style="background:#c0504a"></div><div class="mdot" style="background:#c09030"></div><div class="mdot" style="background:#40904a"></div><span style="font-size:.58rem;color:var(--muted);margin-left:.5rem">crown-dashboard.app</span></div>
-        <div class="mockup-content"><span class="mockup-highlight">📊 CROWN v10 — Live Dashboard</span><br><span style="color:#c4883a">⚡ 3 aktive Valuebets · Kelly 25%</span><br><br>Bayern vs. Dortmund · xG: 2.1 vs 1.4<br><span style="color:#c4883a">Value: +8.3% · Empfehlung: 2.5 Units</span><br><br><span class="mockup-highlight">Telegram Alert gesendet ✓</span></div>
-      </div>
-      <div class="revenue-box">
-        <div class="rev-title">Revenue-Projektion · Monat 6</div>
-        <div class="rev-row"><span class="rev-label">Abos (120 × €49)</span><span class="rev-val rev-amber">€5.880</span></div>
-        <div class="rev-row"><span class="rev-label">White-Label (5 × €299)</span><span class="rev-val rev-amber">€1.495</span></div>
-        <div class="rev-row"><span class="rev-label">Jahres-Abos Bonus</span><span class="rev-val rev-amber">€800</span></div>
-        <div class="rev-row" style="border-top:1px solid #c4883a;padding-top:.7rem"><span class="rev-label" style="color:var(--white)">Gesamt</span><span class="rev-val rev-amber" style="font-size:1.05rem">€8.175/Mo</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FUNNEL 3 -->
-<section id="funnel3" class="funnel">
-  <div class="section-tag" style="color:#b84830">Projekt 03 · IT Recruiting Platform</div>
-  <h2 class="section-title reveal">Verkaufsfunnel:<br>Recruiting Platform</h2>
-  <div class="funnel-grid reveal">
-    <div>
-      <div class="funnel-steps">
-        <div class="step"><div class="step-num ember">1</div><div><div class="step-title">SEO + LinkedIn B2B Outreach</div><div class="step-desc">André schreibt SEO-Texte für „IT Fachkräfte aus Polen". Tomasz baut SEO-technisch saubere Angular-App.</div></div></div>
-        <div class="step"><div class="step-num ember">2</div><div><div class="step-title">Firmen-Demo → 30 Tage Free</div><div class="step-desc">HR-Manager bekommt Demo mit echten Kandidaten-Profilen. KI-Matching zeigt sofort Passung.</div></div></div>
-        <div class="step"><div class="step-num ember">3</div><div><div class="step-title">B2B Abo → €199/Mo pro Firma</div><div class="step-desc">Unbegrenzte Kandidaten-Suche, KI-Matching. Kandidaten zahlen €29/Mo für Premium-Profil.</div></div></div>
-        <div class="step"><div class="step-num ember">4</div><div><div class="step-title">React Native App → Skalierung</div><div class="step-desc">Tomasz baut Mobile App. Push-Notifications bei neuen Matches. App Store Präsenz = organischer Traffic.</div></div></div>
-      </div>
-    </div>
-    <div>
-      <div class="funnel-mockup">
-        <div class="mockup-bar"><div class="mdot" style="background:#c0504a"></div><div class="mdot" style="background:#c09030"></div><div class="mdot" style="background:#40904a"></div><span style="font-size:.58rem;color:var(--muted);margin-left:.5rem">it-talent.de</span></div>
-        <div class="mockup-content"><span class="mockup-highlight">🇵🇱→🇩🇪 IT Talent Matching</span><br><span style="color:#b84830">247 React-Entwickler verfügbar</span><br><br>Tomasz S. · React/Angular · 3 Jahre<br><span style="color:#b84830">KI-Match: 94% · Verfügbar sofort</span><br><br><span class="mockup-highlight">Demo anfragen → kostenlos</span></div>
-      </div>
-      <div class="revenue-box">
-        <div class="rev-title">Revenue-Projektion · Monat 12</div>
-        <div class="rev-row"><span class="rev-label">B2B Firmen (40 × €199)</span><span class="rev-val rev-ember">€7.960</span></div>
-        <div class="rev-row"><span class="rev-label">B2C Kandidaten (200 × €29)</span><span class="rev-val rev-ember">€5.800</span></div>
-        <div class="rev-row"><span class="rev-label">Premium Placements</span><span class="rev-val rev-ember">€2.400</span></div>
-        <div class="rev-row" style="border-top:1px solid #b84830;padding-top:.7rem"><span class="rev-label" style="color:var(--white)">Gesamt</span><span class="rev-val rev-ember" style="font-size:1.05rem">€16.160/Mo</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+</div>
+</div>
 
 <!-- TEAM -->
-<section id="team" class="team-section">
+<div id="team" class="team-wrap">
+<div class="team-inner">
   <div class="section-tag">Das Team</div>
-  <h2 class="section-title reveal">Zwei Experten.<br>Ein Ziel.</h2>
-  <div class="team-grid reveal">
+  <div class="section-title">Zwei Spezialisten.<br>Ein Ziel.</div>
+  <div class="team-grid">
     <div class="team-card">
-      <div class="team-role">⚡ Fullstack Developer</div>
+      <div class="team-role">Fullstack Development</div>
       <div class="team-name">Tomasz Szafrański</div>
-      <div class="team-title">Diplom Software Engineering · Spezialisierung Programming · Polen → DE</div>
+      <div class="team-title">Senior Developer · React · .NET · Mobile</div>
       <div class="team-skills">
-        <span class="skill-tag hot">React + Redux</span><span class="skill-tag hot">Angular 2+</span><span class="skill-tag hot">.NET / C#</span><span class="skill-tag hot">React Native</span><span class="skill-tag">TypeScript</span><span class="skill-tag">PHP</span><span class="skill-tag">PostgreSQL</span><span class="skill-tag">SQL Server</span><span class="skill-tag">Entity Framework</span>
+        <span class="skill-tag hot">React</span>
+        <span class="skill-tag hot">Angular</span>
+        <span class="skill-tag hot">.NET / C#</span>
+        <span class="skill-tag">React Native</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">SQLite</span>
+        <span class="skill-tag">REST APIs</span>
       </div>
-      <div class="team-stat-row">
-        <div class="team-stat"><div class="ts-num">3+</div><div class="ts-label">Jahre React</div></div>
-        <div class="team-stat"><div class="ts-num">3+</div><div class="ts-label">Jahre .NET</div></div>
-        <div class="team-stat"><div class="ts-num">Full</div><div class="ts-label">Stack</div></div>
-      </div>
+      <div class="team-bio">Fullstack-Entwickler mit Erfahrung in Enterprise-Projekten und MVPs. Baut sauber, denkt in Systemen, liefert pünktlich.</div>
     </div>
     <div class="team-card">
-      <div class="team-role">✍️ Copywriter & KI-Stratege</div>
-      <div class="team-name">André S.</div>
-      <div class="team-title">ASGlobal · Ortsbeirat Frankfurt · Energie & Digitalisierung</div>
+      <div class="team-role">Copy & KI-Integration</div>
+      <div class="team-name">André Schwarz</div>
+      <div class="team-title">Copywriter · Digitalisierung · ASGlobal Frankfurt</div>
       <div class="team-skills">
-        <span class="skill-tag hot">Conversion Copy</span><span class="skill-tag hot">Claude AI</span><span class="skill-tag hot">CROWN v10</span><span class="skill-tag hot">Telegram Bots</span><span class="skill-tag">Python / Termux</span><span class="skill-tag">GitHub</span><span class="skill-tag">Gumroad · Stripe</span><span class="skill-tag">SEO Texte</span>
+        <span class="skill-tag hot">Conversion Copy</span>
+        <span class="skill-tag hot">Claude AI</span>
+        <span class="skill-tag hot">Landingpages</span>
+        <span class="skill-tag">Ghostwriting</span>
+        <span class="skill-tag">DE / EN</span>
+        <span class="skill-tag">GEO 2026</span>
+        <span class="skill-tag">SEO-Copy</span>
       </div>
-      <div class="team-stat-row">
-        <div class="team-stat"><div class="ts-num">5+</div><div class="ts-label">Revenue Streams</div></div>
-        <div class="team-stat"><div class="ts-num">KI</div><div class="ts-label">Powered</div></div>
-        <div class="team-stat"><div class="ts-num">FFM</div><div class="ts-label">Frankfurt</div></div>
-      </div>
+      <div class="team-bio">Texter mit Direktvertriebshintergrund — weiß was verkauft, weil er es selbst getan hat. Digitalisiert nebenbei Hotels und schreibt Wahlprogramme.</div>
     </div>
   </div>
-</section>
+</div>
+</div>
 
-<!-- TIMELINE -->
-<section id="timeline" class="timeline-section">
-  <div class="section-tag">Fahrplan</div>
-  <h2 class="section-title reveal">Konkrete Deadlines</h2>
-  <div class="timeline reveal">
-    <div class="tl-item"><div class="tl-dot sage"></div><div class="tl-week">Woche 1–2 · Projekt 01</div><div class="tl-title">KI-CV-Optimizer — MVP Launch</div><div class="tl-desc">Landing Page live, Upload-Tool, Gumroad-Checkout, erste Verkäufe.</div><span class="tl-who who-t">Tomasz: React + PHP</span>&nbsp;<span class="tl-who who-a">André: Copy + Setup</span></div>
-    <div class="tl-item"><div class="tl-dot sage"></div><div class="tl-week">Woche 3–4 · Projekt 01</div><div class="tl-title">CV Optimizer — Marketing & Scale</div><div class="tl-desc">LinkedIn-Kampagne, TikTok-Content, Email-Automation, Abo-Funnel aktiv.</div><span class="tl-who who-a">André: Marketing</span>&nbsp;<span class="tl-who who-t">Tomasz: Backend</span></div>
-    <div class="tl-item"><div class="tl-dot amber"></div><div class="tl-week">Woche 3–6 · Projekt 02</div><div class="tl-title">Value Bet Dashboard — Beta</div><div class="tl-desc">CROWN v10 in React-Dashboard integriert. .NET API live. Telegram-Kanal startet. 50 Beta-User.</div><span class="tl-who who-t">Tomasz: Dashboard + API</span>&nbsp;<span class="tl-who who-a">André: CROWN + Copy</span></div>
-    <div class="tl-item"><div class="tl-dot amber"></div><div class="tl-week">Woche 7–8 · Projekt 02</div><div class="tl-title">Value Bet SaaS — Public Launch</div><div class="tl-desc">Stripe-Abo aktiv, Paid Marketing, White-Label B2B-Outreach.</div><span class="tl-who who-b">Beide: Launch</span></div>
-    <div class="tl-item"><div class="tl-dot ember"></div><div class="tl-week">Woche 5–12 · Projekt 03</div><div class="tl-title">IT Recruiting Platform — Aufbau</div><div class="tl-desc">Angular-Frontend, .NET MVC Backend, SQL Server. KI-Matching mit Claude. Erste B2B-Demos Woche 10.</div><span class="tl-who who-t">Tomasz: Fullstack</span>&nbsp;<span class="tl-who who-a">André: Brand + SEO</span></div>
-    <div class="tl-item"><div class="tl-dot ember"></div><div class="tl-week">Woche 12+ · Projekt 03</div><div class="tl-title">Recruiting Platform — React Native App</div><div class="tl-desc">Mobile App, App Store, Push-Notifications. Skalierung auf 40+ Firmen-Kunden.</div><span class="tl-who who-t">Tomasz: React Native</span>&nbsp;<span class="tl-who who-a">André: B2B Sales Copy</span></div>
-  </div>
-</section>
+<!-- KONTAKT -->
+<div id="kontakt" class="contact-wrap">
+<div class="contact-inner">
+  <div class="section-tag">Zusammenarbeit</div>
+  <div class="section-title">Projekt anfragen.</div>
+  <div class="contact-grid">
 
-<!-- PRICING -->
-<section id="preise" class="pricing-section">
-  <div class="section-tag">Investment</div>
-  <h2 class="section-title reveal">Was es kostet</h2>
-  <div class="pricing-grid reveal">
-    <div class="price-card">
-      <div class="plan-label pl-low">① CV Optimizer</div>
-      <div class="plan-amount">€299</div>
-      <div class="plan-period">Entwicklungsbudget · 2 Wochen</div>
-      <ul class="plan-list">
-        <li class="li-low">React Frontend + PHP Backend</li>
-        <li class="li-low">Claude AI Integration</li>
-        <li class="li-low">Gumroad Checkout Setup</li>
-        <li class="li-low">Landing Page + Copy</li>
-        <li class="li-low">Email Automation</li>
-        <li class="li-low">ROI ab Woche 3 erwartet</li>
-      </ul>
-      <a href="#kontakt" class="plan-cta" style="background:transparent;border:1px solid rgba(154,190,106,.5);color:#9abe6a;">Jetzt starten →</a>
-    </div>
-    <div class="price-card feat">
-      <div class="plan-label pl-mid">② Value Bet SaaS</div>
-      <div class="plan-amount">€799</div>
-      <div class="plan-period">Entwicklungsbudget · 4 Wochen</div>
-      <ul class="plan-list">
-        <li class="li-mid">React Dashboard + .NET API</li>
-        <li class="li-mid">PostgreSQL + CROWN v10</li>
-        <li class="li-mid">Telegram Bot Integration</li>
-        <li class="li-mid">Stripe Abo-System</li>
-        <li class="li-mid">White-Label Option</li>
-        <li class="li-mid">Monatlich €8K+ Potenzial</li>
-      </ul>
-      <a href="#kontakt" class="plan-cta" style="background:#c4883a;border:1px solid #c4883a;color:#0c0c0c;">Projekt anfragen →</a>
-    </div>
-    <div class="price-card">
-      <div class="plan-label pl-high">③ Recruiting Platform</div>
-      <div class="plan-amount">€2.499</div>
-      <div class="plan-period">Entwicklungsbudget · 8 Wochen</div>
-      <ul class="plan-list">
-        <li class="li-high">Angular + React Native</li>
-        <li class="li-high">.NET MVC + SQL Server</li>
-        <li class="li-high">KI-Matching (Claude API)</li>
-        <li class="li-high">B2B + B2C Monetarisierung</li>
-        <li class="li-high">Mobile App iOS + Android</li>
-        <li class="li-high">€16K/Mo Potenzial Mo. 12</li>
-      </ul>
-      <a href="#kontakt" class="plan-cta" style="background:#b84830;border:1px solid #b84830;color:var(--white);">Enterprise anfragen →</a>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="kontakt" class="contact-section">
-  <div class="section-tag">Kontakt</div>
-  <h2 class="section-title reveal">Projekt anfragen</h2>
-  <div class="contact-grid reveal">
-    <div>
-      <div class="form-field"><label class="form-label">Name</label><input type="text" class="form-input" placeholder="Dein Name"></div>
-      <div class="form-field"><label class="form-label">E-Mail</label><input type="email" class="form-input" placeholder="email@example.com"></div>
-      <div class="form-field">
-        <label class="form-label">Projekt-Interesse</label>
-        <select class="form-select form-input">
-          <option value="">— Projekt wählen —</option>
-          <option>① KI-CV-Optimizer (Low Budget · €299)</option>
-          <option>② Value Bet SaaS (Mid · €799)</option>
-          <option>③ IT Recruiting Platform (Enterprise · €2.499)</option>
-          <option>Eigenes Projekt / Anderes</option>
-        </select>
-      </div>
-      <div class="form-field"><label class="form-label">Nachricht</label><textarea class="form-textarea" placeholder="Kurz beschreiben was du brauchst..."></textarea></div>
-      <button class="form-submit">Anfrage senden →</button>
-    </div>
-    <div>
-      <div class="qr-box">
-        <div class="qr-label">📱 GitHub Repo — Scan me</div>
-        <div id="qr-contact"></div>
-        <div class="qr-url">github.com/intelligentresponder-max/<br>copy-code-agency-website</div>
-      </div>
-      <ul class="contact-info">
-        <li><span class="ci-icon">📍</span><span>Frankfurt am Main, Deutschland</span></li>
-        <li><span class="ci-icon">✉️</span><span>intelligent.responder@gmail.com</span></li>
-        <li><span class="ci-icon">📱</span><span>WhatsApp: 0163 4692255</span></li>
-        <li><span class="ci-icon">🐙</span><span>github.com/intelligentresponder-max</span></li>
-        <li><span class="ci-icon">⚡</span><span>Antwort innerhalb 24h garantiert</span></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-grid">
-    <div>
-      <div class="footer-brand-row">
-        <svg width="30" height="30" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="34" height="34" rx="5" fill="#1a1a1a"/>
-          <text x="3" y="25" font-family="'JetBrains Mono', monospace" font-weight="900" font-size="19" fill="#a8d080">{</text>
-          <text x="12" y="25" font-family="'JetBrains Mono', monospace" font-weight="900" font-size="13" fill="#c94f2a">/</text>
-          <text x="19" y="25" font-family="'JetBrains Mono', monospace" font-weight="900" font-size="19" fill="#a8d080">}</text>
-        </svg>
-        <div>
-          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;color:var(--white)">copy<span style="color:var(--sage)">.</span>code<span style="color:var(--sage)">.</span>agency</div>
-          <div style="font-size:.5rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase">Frankfurt · ASGlobal · 2025</div>
+    <div class="contact-form">
+      <form onsubmit="sendMail(event)">
+        <div class="form-field">
+          <label class="form-label">Name</label>
+          <input class="form-input" id="f-name" type="text" placeholder="Ihr Name" required>
         </div>
-      </div>
-      <p class="footer-desc">Fullstack-Entwicklung + Conversion-Copywriting aus Frankfurt. Tomasz Szafrański & André S. — drei Produkte, ein Team.</p>
-      <div class="footer-qr-label">📱 GitHub Repo scannen</div>
-      <div id="qr-footer"></div>
-      <div class="footer-qr-sub">Direkter Zugang zum<br>Quellcode auf GitHub</div>
+        <div class="form-field">
+          <label class="form-label">E-Mail</label>
+          <input class="form-input" id="f-email" type="email" placeholder="ihre@email.de" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Interesse</label>
+          <select class="form-select" id="f-interest">
+            <option>KI-Lebenslauf Optimizer</option>
+            <option>Value Bet Dashboard</option>
+            <option>IT Recruiting Platform</option>
+            <option>Conversion Copy & Brand</option>
+            <option>Digitalisierung Hospitality</option>
+            <option>MVP in 4 Wochen</option>
+            <option>Anderes Projekt</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Nachricht</label>
+          <textarea class="form-textarea" id="f-msg" placeholder="Kurz beschreiben worum es geht..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Nachricht senden →</button>
+      </form>
     </div>
-    <div>
-      <div class="footer-col-title">Projekte</div>
-      <ul class="footer-links">
-        <li><a href="#funnel1">① KI-CV-Optimizer</a></li>
-        <li><a href="#funnel2">② Value Bet SaaS</a></li>
-        <li><a href="#funnel3">③ Recruiting Platform</a></li>
-        <li><a href="#preise">Preisübersicht</a></li>
+
+    <div class="contact-info-block">
+      <div class="contact-info-title">Direkt ansprechen.</div>
+      <div class="contact-info-sub">Kein langer Fragebogen, kein Agentur-Overhead. Kurze Nachricht reicht — wir melden uns innerhalb von 24 Stunden mit einer ehrlichen Einschätzung.</div>
+      <ul class="contact-list">
+        <li><span class="ci-icon">✍️</span><span>André: <a href="mailto:andre.schwarz1@t-online.de">andre.schwarz1@t-online.de</a></span></li>
+        <li><span class="ci-icon">📱</span><span>WhatsApp: <a href="https://wa.me/491634692255">+49 163 469 2255</a></span></li>
+        <li><span class="ci-icon">📍</span><span>Frankfurt am Main · Remote möglich</span></li>
+        <li><span class="ci-icon">⚡</span><span>Antwort innerhalb 24h</span></li>
       </ul>
     </div>
-    <div>
-      <div class="footer-col-title">Portfolio</div>
-      <ul class="footer-links">
-        <li><a href="#">CROWN v10</a></li>
-        <li><a href="#">mindful7777</a></li>
-        <li><a href="#">BanglaHilfe</a></li>
-        <li><a href="#">MindFlow Hypnose</a></li>
-        <li><a href="#">frankfurt-energie.online</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Links</div>
-      <ul class="footer-links">
-        <li><a href="https://github.com/intelligentresponder-max" target="_blank">GitHub ↗</a></li>
-        <li><a href="https://mindful777.gumroad.com" target="_blank">Gumroad ↗</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
-        <li><a href="#">Impressum</a></li>
-        <li><a href="#">Datenschutz</a></li>
-      </ul>
-    </div>
+
   </div>
-  <div class="footer-bottom">
-    <div class="footer-copy">© 2025 Copy Code Agency · ASGlobal · Frankfurt · Tomasz + André</div>
-    <div class="footer-badges">
-      <span class="badge live">Online</span>
-      <span class="badge">GitHub Pages</span>
-      <span class="badge">Open Source</span>
-    </div>
+</div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-copy">© 2025 Copy Code Agency · ASGlobal Frankfurt · Tomasz Szafrański & André Schwarz</div>
+    <ul class="footer-links">
+      <li><a href="#produkte">Produkte</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a href="https://intelligentresponder-max.github.io/texter-portfolio/" target="_blank">Portfolio André</a></li>
+    </ul>
   </div>
 </footer>
 
 <script>
-window.addEventListener('load',function(){
-  const url='https://github.com/intelligentresponder-max/copy-code-agency-website';
-  try{
-    new QRCode(document.getElementById('qr-contact'),{text:url,width:130,height:130,colorDark:'#a8d080',colorLight:'#0c0c0c',correctLevel:QRCode.CorrectLevel.M});
-    new QRCode(document.getElementById('qr-footer'),{text:url,width:85,height:85,colorDark:'#a8d080',colorLight:'#1a1a1a',correctLevel:QRCode.CorrectLevel.M});
-  }catch(e){}
-});
-const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.08});
-document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+function sendMail(e) {
+  e.preventDefault();
+  const name = document.getElementById('f-name').value;
+  const email = document.getElementById('f-email').value;
+  const interest = document.getElementById('f-interest').value;
+  const msg = document.getElementById('f-msg').value;
+  const subject = encodeURIComponent('Copy Code Agency — Anfrage: ' + interest);
+  const body = encodeURIComponent(
+    'Name: ' + name + '\n' +
+    'E-Mail: ' + email + '\n' +
+    'Interesse: ' + interest + '\n\n' +
+    'Nachricht:\n' + msg
+  );
+  window.location.href = 'mailto:andre.schwarz1@t-online.de?subject=' + subject + '&body=' + body;
+}
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.product,.process-step,.team-card');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.style.opacity = '1'; });
+}, {threshold:0.1});
+reveals.forEach(el => { el.style.transition = 'opacity .6s'; el.style.opacity = '0'; obs.observe(el); });
 </script>
 </body>
 </html>
