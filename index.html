@@ -14,8 +14,12 @@ html{scroll-behavior:smooth;}
 body{background:var(--black);color:var(--text);font-family:'JetBrains Mono',monospace;overflow-x:hidden;line-height:1.6;}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.4;}
 
+/* DEMO-HINWEIS */
+.demo-banner{position:fixed;top:0;left:0;right:0;z-index:950;background:var(--ember);color:#fff;text-align:center;padding:.5rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.03em;line-height:1.5;}
+.demo-banner strong{font-family:'Syne',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.06em;}
+
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;justify-content:space-between;align-items:center;padding:.9rem 2rem;background:rgba(12,12,12,0.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
+nav{position:fixed;top:2.3rem;left:0;right:0;z-index:900;display:flex;justify-content:space-between;align-items:center;padding:.9rem 2rem;background:rgba(12,12,12,0.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
 .logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
 .logo-mark{width:34px;height:34px;}
 .logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:-.02em;color:var(--white);line-height:1;}
@@ -128,10 +132,12 @@ footer{background:var(--steel);border-top:1px solid var(--border);padding:2.5rem
 .footer-links a:hover{color:var(--sage);}
 
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-@media(max-width:768px){.nav-links{display:none;}.contact-grid,.team-grid{grid-template-columns:1fr;}.hero{padding:6rem 1.2rem 3rem;}.section{padding:4rem 1.2rem;}}
+@media(max-width:768px){.nav-links{display:none;}.contact-grid,.team-grid{grid-template-columns:1fr;}.hero{padding:8rem 1.2rem 3rem;}.section{padding:4rem 1.2rem;}.demo-banner{font-size:.58rem;padding:.4rem .6rem;}nav{top:3.4rem;}}
 </style>
 </head>
 <body>
+
+<div class="demo-banner"><strong>Konzept-/Demo-Projekt</strong> — keine aktive Agentur mit Geschäftsbetrieb. Zeigt eine unbeauftragte Idee, kein laufendes Unternehmen.</div>
 
 <nav>
   <a href="#" class="logo">
